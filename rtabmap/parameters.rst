@@ -1,0 +1,17 @@
+************
+Parameters
+************
+
+The rtabmap node has many parameters that we will be editing throughout the year. Currently, there are 4 main parameters to be concerned about.
+
+1. frame_id=base_link
+Frame ID represents the coordinate frame for the center of the robot. By ROS REP 105, the naming convention for this frame ID is base_link.
+
+2. subscribe_depth=True
+This will allow for RTABmap to be subscribed to the depth image. This depth image comes from the Realsense, and will allow for the creation of the map topic.
+
+3. publish_tf=true
+This parameter is actually used twice. Once in the rtabmap node and another in the rgbd_odom node. In the context of the Rtabmap node, the map->odom transform will be published since rtabmap is the localization node. In the context of the rgbd odom node, the odom->base_link transform will be published since rgbd odom is the odometry node.
+
+4. wait_for_transform_duration=10
+This parameter refers to the maximum time that rtabmap will wait for the respective transforms to be published before saying they must be extrapolated.

@@ -1,0 +1,251 @@
+**********************
+ROS2 Control Hardware
+**********************
+
+Overview
+--------------------------
+
+In order to interface moveit path planning with our Talon motor controllers, we have to use ROS2 control. 
+The ROS2 control framework allows us to directly input information from MoveIt into a controller that will provide the proper motor outputs 
+for successful arm movement. This interfacing is done by creating a subclass of the "hardware_interface" package, and we specify this information in 
+lines 11-13 of moveit_arm/config/excavation.ros2_control.xacro.
+This page will break down each method of our arm_hardware class.
+
+Installation
+--------------------------
+
+.. code-block:: bash
+
+    sudo apt-get install ros-foxy-hardware-interface
+    sudo apt-get install ros-foxy-pluginlib
+
+
+Hardware Configure
+--------------------
+
+The configure method of the arm hardware is the first method run when the node starts. This method will run configure_default(info), which will
+setup our joints, state interfaces, and command interfaces. The joints used for our arm are shoulder, elbow, and wrist (named appropriately). 
+The state interface refers to how we read in our current joint state. Because we link potentiometers to our speed controllers, the state
+interfaces used are position and velocity (angular). The command interfaces refers to how we send commands to our speed controllers. Our Talons
+operate based on percent_output meaning that it works on a scale of -1 to 1. Because of this, we use an effort command interface because it will
+convert moveit commands onto an arbitrary scale of -1 to 1.
+
+After all of this default configuration, we have some error handling to stop the node if the joints, state interfaces and command interfaces aren't
+properly setup. Finally, we set status to configured and return no errors.
+
+.. code-block:: c++
+
+    hardware_interface::return_type ArmHardware::configure(const hardware_interface::HardwareInfo & info) {
+        if (configure_default(info) != hardware_interface::return_type::OK) {
+            return hardware_interface::return_type::ERROR;
+        }
+
+        if (info.joints.size() != 3) {
+            RCLCPP_FATAL(rclcpp::get_logger("ArmHardware"), "Arm Hardware should have exactly 3 joints");
+        }
+        for (const auto& joint : info.joints) {
+            if (joint.command_interfaces.size() != 1)
+            RCLCPP_FATAL(rclcpp::get_logger("ArmHardware"),
+                "Joint '%s' needs to have exactly 1 command interface. Has '%d' instead",
+                joint.name.c_str(), joint.command_interfaces.size()
+            );
+            if (joint.command_interfaces[0].name != "effort")
+            RCLCPP_FATAL(rclcpp::get_logger("ArmHardware"),
+                "Joint '%s' can only have an effort command interface. Has '%s' instead",
+                joint.name.c_str(), joint.command_interfaces[0].name.c_str()
+            );
+            if (joint.state_interfaces.size() != 2)
+            RCLCPP_FATAL(rclcpp::get_logger("ArmHardware"),
+                "Joint '%s' needs to have exactly 2 state interface. Has '%d' instead",
+                joint.name.c_str(), joint.state_interfaces.size()
+            );
+            for (const auto& stateInterface : joint.state_interfaces) {
+            if (stateInterface.name != "position" && stateInterface.name != "velocity")
+                RCLCPP_FATAL(rclcpp::get_logger("ArmHardware"),
+                "Joint '%s' can only have position and velocity state interfaces. Has '%s' instead",
+                joint.name.c_str(), stateInterface.name.c_str()
+                );
+            }
+        }
+
+        status_ = hardware_interface::status::CONFIGURED;
+        return hardware_interface::return_type::OK;
+    }
+
+Hardware Export State Interfaces
+-----------------------------------
+
+This method will properly setup the joint state interfaces list by looping through each joint and 
+setting all state interfaces to the proper value (i.e. shoulder position, shoulder velocity, elbow position, ...).
+If there is an unexpected joint, that joint will be logged to the terminal as a failure message.
+
+.. code-block:: c++
+
+    std::vector<hardware_interface::StateInterface>
+    ArmHardware::export_state_interfaces() {
+        std::vector<hardware_interface::StateInterface> stateInterfaces;
+        for (unsigned int i = 0; i < info_.joints.size(); i++) {
+            std::string jointName = info_.joints[i].name;
+            if (jointName == "shoulder") {
+            stateInterfaces.emplace_back(jointName, hardware_interface::HW_IF_POSITION, &shoulderAngle);
+            stateInterfaces.emplace_back(jointName, hardware_interface::HW_IF_VELOCITY, &shoulderVel);
+            } else if (jointName == "elbow") {
+            stateInterfaces.emplace_back(jointName, hardware_interface::HW_IF_POSITION, &elbowAngle);
+            stateInterfaces.emplace_back(jointName, hardware_interface::HW_IF_VELOCITY, &elbowVel);
+            } else if (jointName == "wrist") {
+            stateInterfaces.emplace_back(jointName, hardware_interface::HW_IF_POSITION, &wristAngle);
+            stateInterfaces.emplace_back(jointName, hardware_interface::HW_IF_VELOCITY, &wristVel);
+            } else {
+            RCLCPP_FATAL(rclcpp::get_logger("ArmHardware"), "Joint '%s' is invalid", jointName.c_str());
+            }
+        }
+
+        return stateInterfaces;
+    }
+
+Hardware Export Command Interfaces
+-------------------------------------
+
+This method is very similar to the export state interfaces except it will add command interfaces instead of
+state interfaces (i.e. shoulder effort, elbow effort, ...)
+If there is an unexpected joint, that joint will be logged to the terminal as a failure message.
+
+.. code-block:: c++
+
+    std::vector<hardware_interface::CommandInterface>
+    ArmHardware::export_command_interfaces() {
+        std::vector<hardware_interface::CommandInterface> command_interfaces;
+        for (unsigned int i = 0; i < info_.joints.size(); i++) {
+            std::string jointName = info_.joints[i].name;
+            if (jointName == "shoulder") {
+            command_interfaces.emplace_back(info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &shoulderOutput);
+            } else if (jointName == "elbow") {
+            command_interfaces.emplace_back(info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &elbowOutput);
+            } else if (jointName == "wrist") {
+            command_interfaces.emplace_back(info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &wristOutput);
+            } else {
+            RCLCPP_FATAL(rclcpp::get_logger("ArmHardware"), "Joint '%s' is invalid", jointName.c_str());
+            }
+        }
+
+        return command_interfaces;
+    }
+
+Hardware Stop
+---------------------------------
+
+This method is inherited from the ROS2 control demo stop method. Whenever the node is killed, the status is switched to stopped.
+
+.. code-block:: c++
+
+    hardware_interface::return_type ArmHardware::stop()
+    {
+        RCLCPP_INFO(rclcpp::get_logger("ArmHardware"), "Stopping ...please wait...");
+
+        status_ = hardware_interface::status::STOPPED;
+
+        RCLCPP_INFO(rclcpp::get_logger("ArmHardware"), "System successfully stopped!");
+
+        return hardware_interface::return_type::OK;
+    }
+
+.. note::
+
+    These above methods are based on the ROS2 control demo hardwares. The below methods are structured different than most tutorials because
+    they involve direct interaction with the Talons.
+
+Hardware Start
+---------------------------------
+
+The start method is normally responsible for just setting the control status to started. However, because our control system relies on potentiometer
+data, which we obtain from published topics (/shoulder/angle, /shoulder/vel, /elbow/angle...), and our talons subscribe to output topics created by
+the control system (/shoulder/set, /elbow/set, /wrist/set), we need to have publishers and subscribers. However, this class is not a node, it is a ROS
+plugin, so that means we have to create a node inside of plugin. Therefore, along with updating the control status to start, this method creates a
+node with the appropriate publishers, subscribers, and callbacks that will be updated in the read and write methods below.
+
+.. code-block:: c++
+
+    hardware_interface::return_type ArmHardware::start() {
+        RCLCPP_INFO(rclcpp::get_logger("ArmHardware"), "Starting ...please wait...");
+
+        exec = rclcpp::executors::SingleThreadedExecutor::make_shared();
+        node = rclcpp::Node::make_shared("arm_hardware_node");
+        exec->add_node(node);
+
+        shoulderPub = node->create_publisher<ros_phoenix_msgs::msg::MotorControl>("/shoulder/set", 10);
+        elbowPub = node->create_publisher<ros_phoenix_msgs::msg::MotorControl>("/elbow/set", 10);
+        wristPub = node->create_publisher<ros_phoenix_msgs::msg::MotorControl>("/wrist/set", 10);
+
+        shoulderAngleSub = node->create_subscription<std_msgs::msg::Float64>(
+            "/shoulder/angle", 10, std::bind(&ArmHardware::shoulderAngleCallback, this, _1));
+        elbowAngleSub = node->create_subscription<std_msgs::msg::Float64>(
+            "/elbow/angle", 10, std::bind(&ArmHardware::elbowAngleCallback, this, _1));
+        wristAngleSub = node->create_subscription<std_msgs::msg::Float64>(
+            "/wrist/angle", 10, std::bind(&ArmHardware::wristAngleCallback, this, _1));
+
+        shoulderVelSub = node->create_subscription<std_msgs::msg::Float64>(
+            "/shoulder/vel", 10, std::bind(&ArmHardware::shoulderVelCallback, this, _1));
+        elbowVelSub = node->create_subscription<std_msgs::msg::Float64>(
+            "/elbow/vel", 10, std::bind(&ArmHardware::elbowVelCallback, this, _1));
+        wristVelSub = node->create_subscription<std_msgs::msg::Float64>(
+            "/wrist/vel", 10, std::bind(&ArmHardware::wristVelCallback, this, _1));
+
+        status_ = hardware_interface::status::STARTED;
+
+        RCLCPP_INFO(rclcpp::get_logger("ArmHardware"), "System Successfully started!");
+
+        return hardware_interface::return_type::OK;
+    }
+
+
+Hardware Read
+---------------------------------
+
+The read method is responsible for setting the joint states topic. We get this data from the potetiometers, so we have to subscribe to the 
+shoulder, elbow, and wrist angle and velocity topics. Since this is a plugin, not a node, the topic pub/sub is a little complicated. In the start
+method (see the previous section), we setup the subscribers and their callbacks to update the joint position and velocity variables. The read method
+is responsible for running the node, which will update the callbacks, and set the variables for the joint angle topics.
+
+.. code-block:: c++
+
+    hardware_interface::return_type ArmHardware::read()
+    {
+        exec->spin_once();
+
+        return hardware_interface::return_type::OK;
+    }
+
+Hardware Write
+---------------------------------
+
+The write method is responsible for the actual motor movement. Our plugin will automatically update the command interface variables 
+(shoulder effort, elbow effort, wrist effort) to the percent output required for proper movement. This means this method must publish those outputs 
+to the Talon set topics (/shoulder/set, /elbow/set, /wrist/set). These publishers are setup in the previously mentioned start method, 
+so this method just creates the MotorControl message with the percent output and publish them to the set topics.
+
+.. code-block:: c++
+
+    hardware_interface::return_type ArmHardware::write()
+    {
+        //RCLCPP_INFO(rclcpp::get_logger("ArmHardware"), "Writing...");
+        
+        ros_phoenix_msgs::msg::MotorControl shoulderControl;
+        shoulderControl.mode = ros_phoenix_msgs::msg::MotorControl::PERCENT_OUTPUT;
+        shoulderControl.value = shoulderOutput / 100;
+        shoulderPub->publish(shoulderControl);
+
+        ros_phoenix_msgs::msg::MotorControl elbowControl;
+        elbowControl.mode = ros_phoenix_msgs::msg::MotorControl::PERCENT_OUTPUT;
+        elbowControl.value = elbowOutput / 100;
+        elbowPub->publish(elbowControl);
+
+        ros_phoenix_msgs::msg::MotorControl wristControl;
+        wristControl.mode = ros_phoenix_msgs::msg::MotorControl::PERCENT_OUTPUT;
+        wristControl.value = wristOutput / 100;
+        wristPub->publish(wristControl);
+
+
+        //RCLCPP_INFO(rclcpp::get_logger("ArmHardware"), "Joints successfully written!");
+
+        return hardware_interface::return_type::OK;
+    }

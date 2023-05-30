@@ -1,0 +1,43 @@
+*********************
+Urg Node Installation
+*********************
+
+We use the Hokuyo UTM-30LX-EW. 
+
+In order to use this external sensor, we need to install a driver that will communicate with and control the lidar. The driver we use
+is the urg node.
+
+.. tabs::
+    .. group-tab:: Linux
+        
+        .. code-block:: bash
+
+            sudo apt-get install ros-foxy-urg-node
+            cd ~/urg_node
+            colcon build
+
+In order to communicate with the lidar and receive data over its ethernet cable plugged into your laptop, you need to be on the same subnet as the laser. 
+The lidar's default ip is :code:`192.168.0.10`, so you might need to change your ip, for something on the same subnet.
+
+.. tabs::
+    .. group-tab:: Linux
+
+        * Go into the network settings. 
+        * Settings of the wired connection. 
+        * under IPv4, change the IPv4 method from automatic to Manual and under Addresses, set the values:
+
+        .. code-block:: bash
+
+            Address : 192.168.0.15
+            Netmask : 255.255.255.0
+            Gateway : 192.168.0.1
+
+        * Under eth0 (or maybe something like enpxxxxx), your IP should be 192.168.0.15. You should now be able to ping the ust-20lx at its address (by default 192.168.0.10)
+
+        .. code-block:: bash
+            
+            ping 192.168.0.10
+
+        * If you don't receive any answer, you might have a connection problem or the IP of your laser might have been change, either find it and go on the same subnet or reset it.
+
+Once you can ping the laser, launch the urg_node_driver using the directions in the Launch section.    
