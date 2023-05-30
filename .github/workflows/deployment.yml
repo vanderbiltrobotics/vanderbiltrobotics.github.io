@@ -31,9 +31,10 @@ jobs:
           make html 
         
       
-      # - name: Deploy to Github Pages
-      #   run: |
-      #     git config user.email "ryan.c.taylor@vanderbilt.edu"
-      #     git config user.name  "Ryan Taylor"
-      #     git remote set-url origin 
+      - name: Deploy to Github Pages
+        run: |
+          git config user.email "ryan.c.taylor@vanderbilt.edu"
+          git config user.name  "Ryan Taylor"
+          git add . 
+          git commit -m "website build"
       
