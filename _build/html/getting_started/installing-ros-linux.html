@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installing ROS2 on Linux &mdash; ROS2 Lunabot  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installing ROS2 on macOS" href="installing-ros-mac.html" />
+    <link rel="prev" title="Intro to Lunabotics" href="lunabotics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ROS2 Lunabot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lunabotics.html">Intro to Lunabotics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installing ROS2 on Linux</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#verifying-ros2-works">Verifying ROS2 Works</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installing-ros-mac.html">Installing ROS2 on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-ros-windows.html">Installing ROS2 on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine.html">Virtual Machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repo-setup.html">Repository Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vs-code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Command Line Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">Git Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="best-practices.html">Best Practices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Intro Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../projects/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project1.html">Project 1: Keyboard Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project2.html">Project 2: State Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Important Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ros.html">ROS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/msgs.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/odometry.html">Odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/coord-frames.html">Coordinate Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/rotation.html">Representing Rotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/slam.html">Localization &amp; Mapping</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MoveIt, From Start to Finish</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/urdf.html">Modeling the robot: URDFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/moveit.html">Moving your model: MoveIt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/hardware.html">ROS2 Control Hardware</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">State Machine</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../state_machine/index.html">Basics &amp; Setting Up States</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROS Phoenix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/design.html">Package Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Teleop Control</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../teleop_control/index.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Realsense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTABMAP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Navigation2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Lidar</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/installation.html">Urg Node Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/electrical-setup.html">Electrical Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchurgnode.html">Launch Urg Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchlocalization.html">Launch Localization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/parameters.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/localizationtheory.html">Localization Theory</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ROS2 Lunabot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installing ROS2 on Linux</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting_started/installing-ros-linux.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installing-ros2-on-linux">
+<h1>Installing ROS2 on Linux<a class="headerlink" href="#installing-ros2-on-linux" title="Permalink to this heading"></a></h1>
+<p>ROS2 is well supported on linux so the installation documentation they provide works out of the box.</p>
+<p>You can install ROS2 using pre-built binaries following <a class="reference external" href="https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Binary.html">these directions</a> or you can use the debian packages by following <a class="reference external" href="https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html">these instructions</a>
+. Either way works, but using the debians is probably simpler.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If using the debians, you want to install <code class="code docutils literal notranslate"><span class="pre">ros-foxy-desktop</span></code> since you want GUI tools.</p>
+<p>Also do not worry about the bridge to ROS1 since we currently do not use it</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If packages are failing to build, remember to do the rosdep commands which will install the packages’ dependencies:
+<code class="code docutils literal notranslate"><span class="pre">rosdep</span> <span class="pre">install</span> <span class="pre">-i</span> <span class="pre">--from-path</span> <span class="pre">src</span> <span class="pre">--rosdistro</span> <span class="pre">foxy</span> <span class="pre">-y</span></code></p>
+</div>
+<section id="verifying-ros2-works">
+<h2>Verifying ROS2 Works<a class="headerlink" href="#verifying-ros2-works" title="Permalink to this heading"></a></h2>
+<p>In order to easily verify everything is installed and working correctly run the following commands and make sure there are no errors:</p>
+<p>In one terminal run <code class="code docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">demo_nodes_cpp</span> <span class="pre">talker</span></code> and in another terminal run <code class="code docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">demo_nodes_cpp</span> <span class="pre">listener</span></code>.
+If there are no errors while these run, that’s great and means that C++ nodes work for ROS2 on your machine!</p>
+<p>Next, in one terminal run <code class="code docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">demo_nodes_py</span> <span class="pre">talker</span></code> and in another terminal run <code class="code docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">demo_nodes_py</span> <span class="pre">listener</span></code>.
+If there are no errors while these run, that’s great and means that python nodes work for ROS2 on your machine!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lunabotics.html" class="btn btn-neutral float-left" title="Intro to Lunabotics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installing-ros-mac.html" class="btn btn-neutral float-right" title="Installing ROS2 on macOS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Vanderbilt Robotics.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

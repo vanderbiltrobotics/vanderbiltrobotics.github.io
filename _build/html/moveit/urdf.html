@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modeling the robot: URDFs &mdash; ROS2 Lunabot  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Moving your model: MoveIt" href="moveit.html" />
+    <link rel="prev" title="Installation" href="installing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ROS2 Lunabot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/lunabotics.html">Intro to Lunabotics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-linux.html">Installing ROS2 on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-mac.html">Installing ROS2 on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-windows.html">Installing ROS2 on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/virtual-machine.html">Virtual Machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/repo-setup.html">Repository Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/vs-code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/commands.html">Command Line Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/git.html">Git Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/best-practices.html">Best Practices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Intro Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../projects/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project1.html">Project 1: Keyboard Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project2.html">Project 2: State Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Important Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ros.html">ROS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/msgs.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/odometry.html">Odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/coord-frames.html">Coordinate Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/rotation.html">Representing Rotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/slam.html">Localization &amp; Mapping</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MoveIt, From Start to Finish</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Modeling the robot: URDFs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#urdf-basics">URDF Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualizing-a-urdf-in-rviz2">Visualizing a URDF in rviz2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#onshape-to-urdf">onshape-to-urdf</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="moveit.html">Moving your model: MoveIt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardware.html">ROS2 Control Hardware</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">State Machine</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../state_machine/index.html">Basics &amp; Setting Up States</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROS Phoenix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/design.html">Package Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Teleop Control</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../teleop_control/index.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Realsense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTABMAP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Navigation2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Lidar</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/installation.html">Urg Node Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/electrical-setup.html">Electrical Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchurgnode.html">Launch Urg Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchlocalization.html">Launch Localization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/parameters.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/localizationtheory.html">Localization Theory</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ROS2 Lunabot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Modeling the robot: URDFs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/moveit/urdf.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="modeling-the-robot-urdfs">
+<h1>Modeling the robot: URDFs<a class="headerlink" href="#modeling-the-robot-urdfs" title="Permalink to this heading"></a></h1>
+<p>Relevant package: <a class="reference external" href="https://github.com/vanderbiltrobotics/lunabot-ros2/tree/main/arm_urdf">arm_urdf</a></p>
+<p>As anyone who’s ever done programming for a robotics team can attest,
+the programming team always gets the robot last. Because of this,
+ROS has several included tools that allow programmers to simulate the
+robot with CAD and test it before a robot is even physically built.
+These tools also help programmers make sure that their movement code
+won’t break the robot when it’s tested physically for the first time.</p>
+<p>In the case of MoveIt, though, these tools are most useful for
+<strong>inverse kinematics</strong> – essentially, being able to tell an arm,
+for example, what position to move to, and then for it to figure out
+how to move to get there as quickly as possible.</p>
+<section id="urdf-basics">
+<h2>URDF Basics<a class="headerlink" href="#urdf-basics" title="Permalink to this heading"></a></h2>
+<p>A URDF – or Unified Robot Description Format – is an XML file
+(like HTML, with tags and stuff) that describes what a robot should look like.
+It contains “links”, which are the robot parts themselves (pieces of an arm, etc.),
+and “joints” (what connect the links together).</p>
+<p>Here’s an example of a link:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;myfirst&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;base_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;visual&gt;</span>
+<span class="w">        </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">            </span><span class="nt">&lt;cylinder</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;0.6&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;0.2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/visual&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/link&gt;</span>
+<span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+<p>And a joint (which goes inside &lt;robot&gt;):</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;head_swivel&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;continuous&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;head&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0.3&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+<p>The base part at (0,0,0) that the entire robot is “jointed”
+around is named the “base_link”.</p>
+<p>In addition to using basic shapes like &lt;cylinder&gt;, etc.,
+you can also import a CAD model (with this in &lt;geometry&gt; of the link):</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;mesh</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;package://some/path/to/cad.stl&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Links can have collision constraints on them, which basically
+give the area of the part that no other part should ever enter.
+This can look exactly like the link geometry (so it just can’t enter the part),
+or you can add some buffer room for safety. For example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;base_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;visual&gt;</span>
+<span class="w">        </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">            </span><span class="nt">&lt;cylinder</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;0.6&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;0.2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">        </span><span class="nt">&lt;material</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;blue&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">rgba=</span><span class="s">&quot;0 0 .8 1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/material&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/visual&gt;</span>
+<span class="w">    </span><span class="nt">&lt;collision&gt;</span>
+<span class="w">        </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">            </span><span class="nt">&lt;cylinder</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;0.6&quot;</span><span class="w"> </span><span class="na">radius=</span><span class="s">&quot;0.2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/collision&gt;</span>
+<span class="nt">&lt;/link&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When visualizing a URDF in RViz by itself with the
+commands on this page, these collisions won’t show up.
+They’ll show up in MoveIt’s visualization, though.</p>
+</div>
+<p>These are the types of joints you can make:</p>
+<ul class="simple">
+<li><p>Fixed: rigid connection, no motion</p></li>
+<li><p>Revolute: support constrained rotation in 1 dimension (along a single axis) (need to specify upper and lower limits)</p></li>
+<li><p>Continuous: unlimited variant of revolute joints</p></li>
+<li><p>Prismatic: support translation in 1 dimension (along a single axis)</p></li>
+<li><p>Planar: translation in two dimensions</p></li>
+<li><p>Floating: unlimited motion (translation and rotation) in all 6 dimensions</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>A Brief Aside About Xacro</strong></p>
+<p>Xacro is a macro language that potentially reduces the amount
+of code within a urdf file. With Xacro, you can assign values to
+constants, perform basic math (4 basic operators plus sine and cosines), and create macros.
+We don’t use Xacro, but it’s useful to know what it is.</p>
+</div>
+</section>
+<section id="visualizing-a-urdf-in-rviz2">
+<h2>Visualizing a URDF in rviz2<a class="headerlink" href="#visualizing-a-urdf-in-rviz2" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In order to follow this part of the tutorial, make sure the
+<a class="reference external" href="https://github.com/vanderbiltrobotics/lunabot-ros2">lunabot-ros2 repository</a>
+is in your workspace, and that <strong>your workspace is sourced</strong>.</p>
+</div>
+<p>In order to visualize a URDF in rviz2, run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Launch robot.urdf in arm_urdf</span>
+ros2<span class="w"> </span>launch<span class="w"> </span>arm_urdf<span class="w"> </span>display.launch.py
+<span class="c1"># Launch a custom URDF file (must be in directory)</span>
+ros2<span class="w"> </span>launch<span class="w"> </span>arm_urdf<span class="w"> </span>display.launch.py<span class="w"> </span>model:<span class="o">=</span>your.urdf
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/rvizurdf.png"><img alt="URDF + RVIZ view, with joint state publisher" src="../_images/rvizurdf.png" style="width: 750px;" /></a>
+<p>Moveable joints should show up in the joint state publisher GUI.
+If the GUI doesn’t show up, make sure you have
+<code class="code docutils literal notranslate"><span class="pre">ros-foxy-joint-state-publisher-gui</span></code> installed.</p>
+</section>
+<section id="onshape-to-urdf">
+<h2>onshape-to-urdf<a class="headerlink" href="#onshape-to-urdf" title="Permalink to this heading"></a></h2>
+<p>TODO</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installing.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="moveit.html" class="btn btn-neutral float-right" title="Moving your model: MoveIt" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Vanderbilt Robotics.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

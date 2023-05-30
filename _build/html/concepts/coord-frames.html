@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coordinate Frames &mdash; ROS2 Lunabot  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Representing Rotation" href="rotation.html" />
+    <link rel="prev" title="Odometry" href="odometry.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ROS2 Lunabot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/lunabotics.html">Intro to Lunabotics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-linux.html">Installing ROS2 on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-mac.html">Installing ROS2 on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-windows.html">Installing ROS2 on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/virtual-machine.html">Virtual Machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/repo-setup.html">Repository Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/vs-code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/commands.html">Command Line Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/git.html">Git Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/best-practices.html">Best Practices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Intro Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../projects/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project1.html">Project 1: Keyboard Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project2.html">Project 2: State Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Important Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros.html">ROS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msgs.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="odometry.html">Odometry</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Coordinate Frames</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#why-use-coordinate-frames">Why Use Coordinate Frames?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#world-map-frame">World/Map Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#robot-frame">Robot Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#relationships-between-frames">Relationships between Frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mobile-robot-transform-tree">Mobile Robot Transform Tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#static-transforms">Static Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conventions">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#further-reading">Further Reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rotation.html">Representing Rotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slam.html">Localization &amp; Mapping</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MoveIt, From Start to Finish</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/urdf.html">Modeling the robot: URDFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/moveit.html">Moving your model: MoveIt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/hardware.html">ROS2 Control Hardware</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">State Machine</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../state_machine/index.html">Basics &amp; Setting Up States</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROS Phoenix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/design.html">Package Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Teleop Control</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../teleop_control/index.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Realsense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTABMAP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Navigation2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Lidar</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/installation.html">Urg Node Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/electrical-setup.html">Electrical Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchurgnode.html">Launch Urg Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchlocalization.html">Launch Localization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/parameters.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/localizationtheory.html">Localization Theory</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ROS2 Lunabot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Coordinate Frames</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/concepts/coord-frames.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="coordinate-frames">
+<h1>Coordinate Frames<a class="headerlink" href="#coordinate-frames" title="Permalink to this heading"></a></h1>
+<p>Coordinate frames are a set of orthogonal (perpendicular) axes attached to a body in order to describe the position of things relative to that body. By attaching coordinate frames to meaningful objects such as the robot we are able to compactly represent where in space something is in relation to objects like the robot. All coordinate frames in robotics follow the <a class="reference external" href="https://en.wikipedia.org/wiki/Right-hand_rule">right-hand rule</a>.</p>
+<section id="why-use-coordinate-frames">
+<h2>Why Use Coordinate Frames?<a class="headerlink" href="#why-use-coordinate-frames" title="Permalink to this heading"></a></h2>
+<p>Say we have a camera on top of a wheeled robot and the camera detects an object 100 cm in front of the robot. If the camera is located 10 cm in front of the robot’s base frame, then the object is actually 110 cm from the robot’s base. Attaching coordinate frames to the camera and robot base in this example allows us to transform data between the frames, an important aspect of autonomous navigation.</p>
+</section>
+<section id="world-map-frame">
+<h2>World/Map Frame<a class="headerlink" href="#world-map-frame" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Has its origin at a fixed position with z-axis always poiting upward</p></li>
+<li><p>Represents the world/environment of the robot</p></li>
+<li><p>Known as <code class="docutils literal notranslate"><span class="pre">map</span></code> in ROS</p></li>
+</ul>
+</section>
+<section id="robot-frame">
+<h2>Robot Frame<a class="headerlink" href="#robot-frame" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Represents the robot and is used to define where sensors and other hardware are on the robot</p></li>
+<li><p>Has its origin in the base of the robot (origin changes as the robot moves)</p></li>
+<li><p>Defined in reference to the fixed world (<code class="docutils literal notranslate"><span class="pre">map</span></code>) frame</p></li>
+<li><p>Known as <code class="docutils literal notranslate"><span class="pre">base_link</span></code> in ROS</p></li>
+<li><p>For navigation, its important that <code class="docutils literal notranslate"><span class="pre">base_link</span></code> is located at the rotational center of the robot</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">map</span></code> and <code class="docutils literal notranslate"><span class="pre">base_link</span></code> frames come from (https://www.ros.org/reps/rep-0105.html#id8 ) which defines standards that developers of different packages follow so they are able to integrate nicely. Therefore, we also follow these standards so that we can integrate multiple 3rd party packages together. [comment] &lt;&gt; ( add bracket here ROS REP 105 add bracket here ((https://www.ros.org/reps/rep-0105.html#id8)) )</p></li>
+</ul>
+</section>
+<section id="relationships-between-frames">
+<h2>Relationships between Frames<a class="headerlink" href="#relationships-between-frames" title="Permalink to this heading"></a></h2>
+<p>A tree is used to represent the relationship between coordinate frames. In ROS this tree of relationships is called a transformation tree because the link between two nodes on the tree defines the transformation needed to go from one coordinate frame to the other and vice versa. It is important to note that a transformation consists of a translation (change in x, y, z directions to get from one frame to another) and a rotation (represented as a quaternion).</p>
+<p>As mentioned in the msgs article, a transformation has its own msg type consisting of a Vector3 (translation) and Quaternion (rotation). However, a pose also consists of the same structure of a 3D vector and a Quaternion so it is sometimes published to represent transformations instead of a strict transformation msg type. While both msg types achieve the same thing, the different terminology and usages has been a point of confusion in the past.</p>
+<p>The relationship for <code class="docutils literal notranslate"><span class="pre">map</span></code> and <code class="docutils literal notranslate"><span class="pre">base_link</span></code> would be called map to base_link and would be illustrated as:</p>
+<p><img alt="map --&gt; base_link" src="../_images/map-base.png" /></p>
+<p>In the above picture <code class="docutils literal notranslate"><span class="pre">map</span></code> is denoted as the parent frame of <code class="docutils literal notranslate"><span class="pre">base_link</span></code> because <code class="docutils literal notranslate"><span class="pre">base_link</span></code> is defined in reference to <code class="docutils literal notranslate"><span class="pre">map</span></code>.</p>
+<p>A coordinate frame can only have 1 parent frame. The reason for why this is the case is the only time a frame could be defined in terms of two parent reference frames is if the two parent frames are identical. This means in pracitce that a coordinate frame can have a maximum of 1 unique parent frame.</p>
+<p>While a coordinate frame can hav only 1 parent, it can have multiple children frames. For example, we could have multiple robots  <code class="docutils literal notranslate"><span class="pre">base_link1</span></code>, <code class="docutils literal notranslate"><span class="pre">base_link2</span></code>, etc. all defined in referecne to <code class="docutils literal notranslate"><span class="pre">map</span></code>. This would allow us to calculate the translations and rotations between each of the robots which could be useful if multiple robots need to collaborate in solving a problem.</p>
+</section>
+<section id="mobile-robot-transform-tree">
+<h2>Mobile Robot Transform Tree<a class="headerlink" href="#mobile-robot-transform-tree" title="Permalink to this heading"></a></h2>
+<p>The transform tree used to represent mobile robots in ROS is:</p>
+<p><img alt="map-&gt;odom-&gt;base_link" src="../_images/map-odom-base.png" /></p>
+<p>The above transform tree introduces a new coordinate frame of <code class="docutils literal notranslate"><span class="pre">odom</span></code> (short for odometry). What is the purpose of this new frame and why does it form a link between <code class="docutils literal notranslate"><span class="pre">map</span></code> and <code class="docutils literal notranslate"><span class="pre">base_link</span></code>? First we need some background.</p>
+<p>The transformation between <code class="docutils literal notranslate"><span class="pre">map</span></code> and <code class="docutils literal notranslate"><span class="pre">base_link</span></code> is provided by a localization source where the localization source simply is computing and publishing where the robot is in reference to the origin of the map. Localization constantly re-computes the robot’s pose in the <code class="docutils literal notranslate"><span class="pre">map</span></code> frame based on sensor observations, therefore eliminating drift over time, but causing discrete jumps when new sensor information arrives.</p>
+<p>This means the pose of a robot in the <code class="docutils literal notranslate"><span class="pre">map</span></code> frame should not significantly drift over time from the true pose in the real world, however, due to the localization estimates based on new sensor data the robot’s pose in the <code class="docutils literal notranslate"><span class="pre">map</span></code> frame is not continuous and can change in discrete jumps.</p>
+<p>While <code class="docutils literal notranslate"><span class="pre">map</span></code> is good for long term reference of a robot’s pose, the discrete jumps in pose estimates make it a poor reference frame for actions that rely on accurate local knowledge of where the robot is.</p>
+<p><code class="docutils literal notranslate"><span class="pre">map</span></code> frame’s shortcoming is why we introduce the <code class="docutils literal notranslate"><span class="pre">odom</span></code> frame into the transform tree.<code class="docutils literal notranslate"><span class="pre">odom</span></code> to <code class="docutils literal notranslate"><span class="pre">base_link</span></code> is provided by an odometry source which makes <code class="docutils literal notranslate"><span class="pre">odom</span></code> an accurate local reference frame in the short-term. <code class="docutils literal notranslate"><span class="pre">odom</span></code> is guaranteed to be continuous (no discrete jumps) allowing for accurate pose estimates of the robot in the short term.</p>
+<p>Why is odometry only accurate in the short-term? Because as mentioned in the article on odometry, errors accumulate since each odometry estimate is based on the previous odometry estimate’s position. This leads to the robot’s pose in the <code class="docutils literal notranslate"><span class="pre">odom</span></code> frame drifting away from the true pose of the robot in the real world.</p>
+<p>We want to have both <code class="docutils literal notranslate"><span class="pre">map</span></code> frame’s long-term lack of drift and <code class="docutils literal notranslate"><span class="pre">odom</span></code> frame’s short-term continuity. However, we cannot just make both a parent of <code class="docutils literal notranslate"><span class="pre">base_link</span></code> in the transform tree because that violates the 1 parent rule. Therefore, the transform library will subtract <code class="docutils literal notranslate"><span class="pre">odom</span> <span class="pre">-&gt;</span> <span class="pre">base_link</span></code> from <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">-&gt;</span> <span class="pre">base_link</span></code> to calculate a <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">-&gt;</span> <span class="pre">odom</span></code> transform. This lets us create the transform tree: <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">-&gt;</span> <span class="pre">odom</span> <span class="pre">-&gt;</span> <span class="pre">base_link</span></code> that satisfies the 1 parent rule.</p>
+<p>One thing to note is that when viewing the transform tree, it will display <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">-&gt;</span> <span class="pre">odom</span></code> as being published by the localization source, even though the transform library is doing some internal math to make the <code class="docutils literal notranslate"><span class="pre">map</span></code> to <code class="docutils literal notranslate"><span class="pre">odom</span></code> transformation. <code class="docutils literal notranslate"><span class="pre">odom</span> <span class="pre">-&gt;</span> <span class="pre">base_link</span></code> will be displayed as being published by our odometry source.</p>
+<p>Note that perfectly accurate odometry would yield no difference between <code class="docutils literal notranslate"><span class="pre">map</span></code> and <code class="docutils literal notranslate"><span class="pre">odom</span></code>. However, in the real world odometry is not perfect. This means that there is a difference between where the robot is in relation to the map frame calculated by the localization source and where the robot is in relation to its last position calculated by the odometry source.</p>
+</section>
+<section id="static-transforms">
+<h2>Static Transforms<a class="headerlink" href="#static-transforms" title="Permalink to this heading"></a></h2>
+<p>Since <code class="docutils literal notranslate"><span class="pre">base_link</span></code> represents the robot, we can define new coordinate frames on the robot in reference to <code class="docutils literal notranslate"><span class="pre">base_link</span></code>. Say we add a camera to the front of the robot, then we would want a <code class="docutils literal notranslate"><span class="pre">camera_link</span></code> frame to represent where the camera is on the robot so any transformations can be applied to incoming images so that a correct map of the environment is built up. But in order to create this transformation from <code class="docutils literal notranslate"><span class="pre">base_link</span></code> to <code class="docutils literal notranslate"><span class="pre">camera_link</span></code> we need to create a static transform publisher that defines the constant translation and orientation needed to get from <code class="docutils literal notranslate"><span class="pre">base_link</span></code> to <code class="docutils literal notranslate"><span class="pre">camera_link</span></code>.</p>
+<p>Note: When running the a camera node in ROS, <code class="docutils literal notranslate"><span class="pre">camera_link</span></code> will usually have multiple children frame underneath it as they are used internally by the realsense ROS driver to do the math required to give us a nice and easy to use RGB-Depth image.</p>
+</section>
+<section id="conventions">
+<h2>Conventions<a class="headerlink" href="#conventions" title="Permalink to this heading"></a></h2>
+<p>The full coordinate frame conventions are defined in <a class="reference external" href="https://www.ros.org/reps/rep-0103.html">ROS REP 103</a> but are summarized as follows:</p>
+<p>The common axis convention is:</p>
+<ul class="simple">
+<li><p>x-axis is forward (denoted red)</p></li>
+<li><p>y-axis is left (denoted green)</p></li>
+<li><p>z-axis is up (denoted blue)</p></li>
+</ul>
+<p>The exception is for camera frames with the <code class="docutils literal notranslate"><span class="pre">_optical</span></code> suffix:</p>
+<ul class="simple">
+<li><p>z-axis is forward</p></li>
+<li><p>x-axis is right</p></li>
+<li><p>y-axis is down</p></li>
+</ul>
+</section>
+<section id="further-reading">
+<h2>Further Reading<a class="headerlink" href="#further-reading" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://linklab-uva.github.io/autonomousracing/assets/files/L11-compressed.pdf">(Slides) Coordinate Frames)</a>: good to look through because it has lots of visuals to add intuition</p></li>
+<li><p><a class="reference external" href="https://automaticaddison.com/coordinate-frames-and-transforms-for-ros-based-mobile-robots/">(Article) Coordinate Frames &amp; Transforms</a></p></li>
+<li><p><a class="reference external" href="https://web2.qatar.cmu.edu/~gdicaro/16311-Fall17/slides/16311-LabNotes-Odometry-ROSFrames.pdf">(Slides) Odometry and Reference Frames</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="odometry.html" class="btn btn-neutral float-left" title="Odometry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rotation.html" class="btn btn-neutral float-right" title="Representing Rotation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Vanderbilt Robotics.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

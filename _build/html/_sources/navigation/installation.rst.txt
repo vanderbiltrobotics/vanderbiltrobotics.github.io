@@ -1,0 +1,27 @@
+************
+Installation
+************
+
+Navigation2 and Nav2 bringup are packages that are important for the actual path planning and autonomous navigation for the actual robot. Turtlebot3 is a way to path planning given a static map and simulated odometry. This is a good way to test the actual navigation parameters in "perfectly simulated" conditions.
+
+.. tabs::
+  .. group-tab:: Linux
+  
+    .. code-block:: bash
+    
+        sudo apt install ros-foxy-navigation2
+        sudo apt install ros-foxy-nav2-bringup
+        sudo apt install ros-foxy-turtlebot3*
+
+To ensure nav2 is functional, try running the following demo simulation :
+
+.. code-block:: bash
+
+    export TURTLEBOT3_MODEL=waffle
+    export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/foxy/share/turtlebot3_gazebo/models
+    ros2 launch nav2_bringup tb3_simulation_launch.py
+
+When the Rviz2 display appears, place a 2D Pose Estimate on the map representing the starting location of the simulated robot. Then, place a Navigation2 Goal representing the simulated goal. You should then see the simulated robot frame move towards the goal.
+
+.. image:: static/nav_rviz.png
+   :width: 600

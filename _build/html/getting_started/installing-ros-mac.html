@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installing ROS2 on macOS &mdash; ROS2 Lunabot  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installing ROS2 on Windows" href="installing-ros-windows.html" />
+    <link rel="prev" title="Installing ROS2 on Linux" href="installing-ros-linux.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ROS2 Lunabot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lunabotics.html">Intro to Lunabotics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-ros-linux.html">Installing ROS2 on Linux</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installing ROS2 on macOS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ros2-base">ROS2 Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-packages">Other Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verifying-ros2-works">Verifying ROS2 Works</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installing-ros-windows.html">Installing ROS2 on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine.html">Virtual Machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repo-setup.html">Repository Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vs-code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Command Line Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">Git Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="best-practices.html">Best Practices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Intro Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../projects/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project1.html">Project 1: Keyboard Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project2.html">Project 2: State Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Important Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ros.html">ROS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/msgs.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/odometry.html">Odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/coord-frames.html">Coordinate Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/rotation.html">Representing Rotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/slam.html">Localization &amp; Mapping</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MoveIt, From Start to Finish</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/urdf.html">Modeling the robot: URDFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/moveit.html">Moving your model: MoveIt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/hardware.html">ROS2 Control Hardware</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">State Machine</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../state_machine/index.html">Basics &amp; Setting Up States</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROS Phoenix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/design.html">Package Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Teleop Control</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../teleop_control/index.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Realsense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTABMAP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Navigation2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Lidar</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/installation.html">Urg Node Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/electrical-setup.html">Electrical Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchurgnode.html">Launch Urg Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchlocalization.html">Launch Localization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/parameters.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/localizationtheory.html">Localization Theory</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ROS2 Lunabot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installing ROS2 on macOS</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting_started/installing-ros-mac.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installing-ros2-on-macos">
+<h1>Installing ROS2 on macOS<a class="headerlink" href="#installing-ros2-on-macos" title="Permalink to this heading"></a></h1>
+<dl class="simple">
+<dt>Current Package Support:</dt><dd><ul class="simple">
+<li><p>All of base ROS2</p></li>
+<li><p>MoveIt2 (full support, &amp; warehouse-ros-sqlite)</p></li>
+<li><p>Navigation2 (Gazebo, path planning, Intel RealSense, erg_node for Hokuyo LiDAR)</p></li>
+</ul>
+</dd>
+<dt>Not Yet Supported:</dt><dd><ul class="simple">
+<li><p>RTAB-Map</p></li>
+<li><p>ros_phoenix (internal support)</p></li>
+</ul>
+</dd>
+<dt>Currently Broken:</dt><dd><ul class="simple">
+<li><p>Some builds against MoveIt – library matching issues</p></li>
+</ul>
+</dd>
+</dl>
+<p>You must be on the <strong>latest</strong> version of macOS to use this install system.
+If you require builds for earlier versions of macOS, or if you need any more
+packages ported for macOS, talk to Nisala!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have an M1 Mac, also keep in mind that this installation must be done in a
+Rosetta Terminal. You can set this up using
+<a class="reference external" href="https://osxdaily.com/2020/11/18/how-run-homebrew-x86-terminal-apple-silicon-mac/">this guide</a>.</p>
+</div>
+<section id="ros2-base">
+<h2>ROS2 Base<a class="headerlink" href="#ros2-base" title="Permalink to this heading"></a></h2>
+<p>Let’s start by installing dependencies. First, you’ll need Xcode developer tools
+installed. Check for these by running <code class="code docutils literal notranslate"><span class="pre">xcode-select</span> <span class="pre">-v</span></code>. If they’re not installed,
+run <code class="code docutils literal notranslate"><span class="pre">xcode-select</span> <span class="pre">--install</span></code>.</p>
+<p>You’ll also want to make sure Homebrew is installed. If you haven’t installed <code class="code docutils literal notranslate"><span class="pre">brew</span></code>, do
+that by running <code class="code docutils literal notranslate"><span class="pre">/bin/bash</span> <span class="pre">-c</span> <span class="pre">&quot;$(curl</span> <span class="pre">-fsSL</span> <span class="pre">https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</span></code></p>
+<p><strong>If you’re on M1</strong> and you created a new Intel terminal for this (see the earlier note), know that you’ll need to install brew
+on your Intel terminal separately – that is to say, even if you had brew installed on your other Terminal,
+it doesn’t carry over. You’ll also want to add the following brew switch code to your <code class="code docutils literal notranslate"><span class="pre">.zshrc</span> <span class="pre">/</span> <span class="pre">.bash_profile</span></code>
+(depending on what shell you use), in order to make sure that the shell uses the correct brew architecture.
+Delete any other <code class="code docutils literal notranslate"><span class="pre">brew</span> <span class="pre">shellenv</span></code> commands in this file, if they exist, before putting this in:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>arch<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;i386&quot;</span><span class="w"> </span><span class="o">]</span>
+<span class="k">then</span>
+<span class="w">    </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>/usr/local/bin/brew<span class="w"> </span>shellenv<span class="k">)</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>/opt/homebrew/bin/brew<span class="w"> </span>shellenv<span class="k">)</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+<p>To be clear – if you’re not on M1, this is not needed.</p>
+<p>Finally, you’ll want to make sure that you don’t have Anaconda or any other conda in your environment.
+If you have Anaconda installed, remove it from your terminal environment by either
+uninstalling it altogether, or by removing the code that loads it into your shell in your <code class="code docutils literal notranslate"><span class="pre">.zshrc</span></code>
+or <code class="code docutils literal notranslate"><span class="pre">.bash_profile</span></code>.</p>
+<p>Now, let’s actually begin installation. Run the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>update
+xcode-select<span class="w"> </span>-p
+brew<span class="w"> </span>install<span class="w"> </span>cppcheck<span class="w"> </span>eigen<span class="w"> </span>pcre<span class="w"> </span>poco<span class="w"> </span>tinyxml<span class="w"> </span>wget<span class="w"> </span>bullet<span class="w"> </span>bison
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/usr/local/opt/bison/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+brew<span class="w"> </span>install<span class="w"> </span>python@3.8
+brew<span class="w"> </span>unlink<span class="w"> </span>python
+brew<span class="w"> </span>link<span class="w"> </span>--force<span class="w"> </span>--overwrite<span class="w"> </span>python@3.8
+brew<span class="w"> </span>install<span class="w"> </span>python@3.9
+brew<span class="w"> </span>install<span class="w"> </span>asio<span class="w"> </span>tinyxml2<span class="w"> </span>opencv<span class="w"> </span>console_bridge<span class="w"> </span>openssl<span class="w"> </span>cmake
+<span class="nb">export</span><span class="w"> </span><span class="nv">OPENSSL_ROOT_DIR</span><span class="o">=</span><span class="k">$(</span>brew<span class="w"> </span>--prefix<span class="w"> </span>openssl<span class="k">)</span>
+brew<span class="w"> </span>install<span class="w"> </span>log4cxx<span class="w"> </span>spdlog<span class="w"> </span>cunit<span class="w"> </span>qt@5<span class="w"> </span>freetype<span class="w"> </span>assimp
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_PREFIX_PATH</span><span class="o">=</span><span class="nv">$CMAKE_PREFIX_PATH</span>:/usr/local/opt/qt@5
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/opt/qt@5/bin
+brew<span class="w"> </span>install<span class="w"> </span>graphviz<span class="w"> </span>pyqt5<span class="w"> </span>sip
+sudo<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>argcomplete<span class="w"> </span>catkin_pkg<span class="w"> </span>colcon-common-extensions<span class="w"> </span>coverage<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>cryptography<span class="w"> </span>empy<span class="w"> </span>flake8<span class="w"> </span>flake8-blind-except<span class="w"> </span>flake8-builtins<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>flake8-class-newline<span class="w"> </span>flake8-comprehensions<span class="w"> </span>flake8-deprecated<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>flake8-docstrings<span class="w"> </span>flake8-import-order<span class="w"> </span>flake8-quotes<span class="w"> </span>ifcfg<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>importlib-metadata<span class="w"> </span>lark-parser<span class="w"> </span>lxml<span class="w"> </span>mock<span class="w"> </span>mypy<span class="w"> </span>netifaces<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>nose<span class="w"> </span>pep8<span class="w"> </span>pydocstyle<span class="w"> </span>pydot<span class="w"> </span>pygraphviz<span class="w"> </span>pyparsing<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>pytest-mock<span class="w"> </span>rosdep<span class="w"> </span>setuptools<span class="w"> </span>vcstool<span class="w"> </span>rosdistro<span class="w"> </span>numpy
+</pre></div>
+</div>
+<p>Add the following commands to your <code class="code docutils literal notranslate"><span class="pre">~/.bash_profile</span></code> file if you’re using bash, or
+<code class="code docutils literal notranslate"><span class="pre">~/.zshrc</span></code> if you’re using zsh (the default for newer Macs). If you see a $ at the end
+of your terminal, it’s probably bash. If you see a %, it’s probably zsh.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/usr/local/opt/bison/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OPENSSL_ROOT_DIR</span><span class="o">=</span><span class="k">$(</span>brew<span class="w"> </span>--prefix<span class="w"> </span>openssl<span class="k">)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_PREFIX_PATH</span><span class="o">=</span><span class="nv">$CMAKE_PREFIX_PATH</span>:/usr/local/opt/qt@5
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/opt/qt@5/bin
+</pre></div>
+</div>
+<p>Finally, quit and re-open your terminal.</p>
+<p>Now, it’s time to actually install ROS2. Go ahead and run the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/ros/foxy
+sudo<span class="w"> </span>chown<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>whoami<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>/opt/ros<span class="w"> </span>/opt/ros/foxy
+</pre></div>
+</div>
+<p>Now, open up Finder, click Go &gt; Go to folder in the top bar menu, and type in <code class="code docutils literal notranslate"><span class="pre">/opt/ros/foxy</span></code>.
+You’ll want to download ROS2 base <a class="reference external" href="https://github.com/nkalupahana/ros2-foxy-macos/releases/download/ros2-foxy-base/ros2-foxy-base.zip">here</a>.
+Then, move the ZIP file to <code class="code docutils literal notranslate"><span class="pre">/opt/ros/foxy</span></code>, and extract it. That’s it! You have ROS installed.</p>
+<p>To properly source ROS2, you’ll want to add the following line to your <code class="code docutils literal notranslate"><span class="pre">.bash_profile</span></code> if you’re using Bash:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/foxy/ros2-foxy-base/setup.bash
+</pre></div>
+</div>
+<p>Or to your <code class="code docutils literal notranslate"><span class="pre">.zshrc</span></code> if you’re using zsh:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/foxy/ros2-foxy-base/setup.zsh
+</pre></div>
+</div>
+<p>Finally, these binaries aren’t codesigned or verified by Apple, so in order to run them,
+you’ll have to clear Gatekeeper’s warnings about them. To do that, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xattr<span class="w"> </span>-cr<span class="w"> </span>/opt/ros/foxy
+</pre></div>
+</div>
+<p>Eventually, we should have most of our binaries codesigned and notarized,
+but that’s… a lot of work I don’t have time for right now.</p>
+</section>
+<section id="other-packages">
+<h2>Other Packages<a class="headerlink" href="#other-packages" title="Permalink to this heading"></a></h2>
+<p>You’ll see several other ROS package bundles on <a class="reference external" href="https://github.com/nkalupahana/ros2-foxy-macos/releases">the releases page</a>,
+in addition to ROS2 base. To install these, as needed:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/nkalupahana/ros2-foxy-macos/tree/main/setup">Open the corresponding .bash file for the package you want to install</a>, and run any brew install commands it contains.</p></li>
+<li><p>Download the release zip, unzip it in <code class="code docutils literal notranslate"><span class="pre">/opt/ros/foxy</span></code>, and add a source line (like with base) in your <code class="code docutils literal notranslate"><span class="pre">.bash_profile</span></code> or <code class="code docutils literal notranslate"><span class="pre">.zshrc</span></code>.</p></li>
+<li><p>Run <code class="code docutils literal notranslate"><span class="pre">xattr</span> <span class="pre">-cr</span> <span class="pre">/opt/ros/foxy</span></code> to clear Gatekeeper warnings.</p></li>
+</ul>
+</section>
+<section id="verifying-ros2-works">
+<h2>Verifying ROS2 Works<a class="headerlink" href="#verifying-ros2-works" title="Permalink to this heading"></a></h2>
+<p>In order to easily verify everything is installed and working correctly run the following commands and make sure there are no errors:</p>
+<p>In one terminal run <code class="code docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">demo_nodes_cpp</span> <span class="pre">talker</span></code> and in another terminal run <code class="code docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">demo_nodes_cpp</span> <span class="pre">listener</span></code>.
+If there are no errors while these run, that’s great and means that C++ nodes work for ROS2 on your machine!</p>
+<p>Next, in one terminal run <code class="code docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">demo_nodes_py</span> <span class="pre">talker</span></code> and in another terminal run <code class="code docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">demo_nodes_py</span> <span class="pre">listener</span></code>.
+If there are no errors while these run, that’s great and means that python nodes work for ROS2 on your machine!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installing-ros-linux.html" class="btn btn-neutral float-left" title="Installing ROS2 on Linux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installing-ros-windows.html" class="btn btn-neutral float-right" title="Installing ROS2 on Windows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Vanderbilt Robotics.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

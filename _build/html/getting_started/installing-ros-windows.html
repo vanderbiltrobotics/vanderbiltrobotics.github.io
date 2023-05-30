@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installing ROS2 on Windows &mdash; ROS2 Lunabot  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Virtual Machine" href="virtual-machine.html" />
+    <link rel="prev" title="Installing ROS2 on macOS" href="installing-ros-mac.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ROS2 Lunabot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lunabotics.html">Intro to Lunabotics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-ros-linux.html">Installing ROS2 on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-ros-mac.html">Installing ROS2 on macOS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installing ROS2 on Windows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#environment-setup">Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-useful-setup">Other Useful Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verifying-ros2-works">Verifying ROS2 Works</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine.html">Virtual Machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repo-setup.html">Repository Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vs-code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Command Line Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">Git Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="best-practices.html">Best Practices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Intro Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../projects/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project1.html">Project 1: Keyboard Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project2.html">Project 2: State Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Important Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ros.html">ROS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/msgs.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/odometry.html">Odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/coord-frames.html">Coordinate Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/rotation.html">Representing Rotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/slam.html">Localization &amp; Mapping</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MoveIt, From Start to Finish</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/urdf.html">Modeling the robot: URDFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/moveit.html">Moving your model: MoveIt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/hardware.html">ROS2 Control Hardware</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">State Machine</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../state_machine/index.html">Basics &amp; Setting Up States</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROS Phoenix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/design.html">Package Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Teleop Control</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../teleop_control/index.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Realsense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTABMAP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Navigation2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Lidar</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/installation.html">Urg Node Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/electrical-setup.html">Electrical Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchurgnode.html">Launch Urg Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchlocalization.html">Launch Localization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/parameters.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/localizationtheory.html">Localization Theory</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ROS2 Lunabot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installing ROS2 on Windows</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting_started/installing-ros-windows.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installing-ros2-on-windows">
+<h1>Installing ROS2 on Windows<a class="headerlink" href="#installing-ros2-on-windows" title="Permalink to this heading"></a></h1>
+<dl class="simple">
+<dt>Current Package Support:</dt><dd><ul class="simple">
+<li><p>All of base ROS2</p></li>
+<li><p>MoveIt2 (full support)</p></li>
+<li><p>Navigation2 (Gazebo, path planning)</p></li>
+</ul>
+</dd>
+<dt>Not Yet Supported:</dt><dd><ul class="simple">
+<li><p>Realsense</p></li>
+<li><p>RTAB-Map</p></li>
+<li><p>warehouse-ros-sqlite</p></li>
+</ul>
+</dd>
+</dl>
+<p>If you need any more packages ported for Windows, talk to Akash!</p>
+<section id="environment-setup">
+<h2>Environment Setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading"></a></h2>
+<p>Let’s start by installing <a class="reference external" href="https://chocolatey.org/">Chocolatey</a>, which is a package manager for Windows.
+In order to install it, you will need to run the commands it says in an administrator powershell.</p>
+<p>Then, run the following commands to install all the dependencies.
+If you already have Python installed, then don’t run that line.
+If you already have cmake installed, please uninstall it and let chocolatey install it.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">choco</span> <span class="n">install</span> <span class="n">-y</span> <span class="n">python</span> <span class="p">-</span><span class="n">-version</span> <span class="n">3</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">3</span>
+<span class="n">choco</span> <span class="n">install</span> <span class="n">-y</span> <span class="n">cmake</span><span class="p">.</span><span class="n">install</span> <span class="p">-</span><span class="n">-installargs</span> <span class="s1">&#39;&quot;ADD_CMAKE_TO_PATH=System&quot;&#39;</span>
+<span class="n">choco</span> <span class="n">install</span> <span class="n">-y</span> <span class="n">vcredist2013</span> <span class="n">vcredist140</span> <span class="n">ninja</span>
+</pre></div>
+</div>
+<p>Then, you need to upgrade pip and then install all the pip packages. Make sure to open a new powershell window. This one
+does not have to be an administrator one.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">-U</span> <span class="n">vcstool</span> <span class="n">colcon-common-extensions</span> <span class="n">catkin_pkg</span> <span class="n">cryptography</span> <span class="n">EmPy</span> <span class="n">ifcfg</span> <span class="n">lark-parser</span> <span class="n">lxml</span> <span class="p">`</span>
+<span class="n">netifaces</span> <span class="n">numpy</span> <span class="n">opencv-python</span> <span class="n">pyparsing</span> <span class="n">pyyaml</span> <span class="n">setuptools</span> <span class="n">rosdistro</span> <span class="n">pydot</span> <span class="n">PyQt5</span>
+</pre></div>
+</div>
+<p>Then, you need install MSVC which is Microsoft’s C++ compiler. Download
+<a class="reference external" href="https://visualstudio.microsoft.com">Visual Studio Community 2022</a>.
+Make sure to have <code class="code docutils literal notranslate"><span class="pre">Desktop</span> <span class="pre">development</span> <span class="pre">with</span> <span class="pre">C+</span></code> checked and no C++ CMake tools are checked.</p>
+<p>Now, it’s time to actually install ROS2. Go ahead and run the following commands:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">-p</span> <span class="n">C</span><span class="p">:/</span><span class="n">opt</span><span class="p">/</span><span class="n">ros</span><span class="p">/</span><span class="n">foxy</span>
+<span class="nb">cd </span><span class="n">C</span><span class="p">:/</span><span class="n">opt</span><span class="p">/</span><span class="n">ros</span><span class="p">/</span><span class="n">foxy</span>
+<span class="n">explorer</span> <span class="p">.</span>
+</pre></div>
+</div>
+<p>This should open up a File Explorer window in <code class="code docutils literal notranslate"><span class="pre">C:/opt/ros/foxy</span></code>
+You’ll want to download
+<a class="reference external" href="https://github.com/Ace314159/ros2-foxy-windows-packages/releases/download/ros2-foxy-combined/ros2-foxy-combined.7z">our prebuilt ROS2</a>.
+Then, move the ZIP file to <code class="code docutils literal notranslate"><span class="pre">C:/opt/ros/foxy</span></code>, and extract it. You will need <a class="reference external" href="https://www.7-zip.org/">7-zip</a> to extract it.
+In order to extract in the correct folder, right click the 7z file, Go to <code class="code docutils literal notranslate"><span class="pre">7-Zip</span> <span class="pre">--&gt;</span> <span class="pre">Extract</span> <span class="pre">files...</span></code>.
+This will open up a window. In the <code class="code docutils literal notranslate"><span class="pre">Extract</span> <span class="pre">to:</span></code> field put <code class="code docutils literal notranslate"><span class="pre">C:/opt/ros/foxy</span></code>. That’s it! You have ROS installed.</p>
+<p>To properly source ROS2, you’ll want to add the following line to your Powershell profile. You can access the file by running
+<code class="code docutils literal notranslate"><span class="pre">notepad</span> <span class="pre">$PROFILE</span></code> in a Powershell terminal. This will open the file in Notepad. Add the following line to the end and save:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:/</span><span class="n">opt</span><span class="p">/</span><span class="n">ros</span><span class="p">/</span><span class="n">foxy</span><span class="p">/</span><span class="n">x64</span><span class="p">/</span><span class="n">local_setup</span><span class="p">.</span><span class="n">ps1</span>
+</pre></div>
+</div>
+<p>That’s all!</p>
+</section>
+<section id="other-useful-setup">
+<h2>Other Useful Setup<a class="headerlink" href="#other-useful-setup" title="Permalink to this heading"></a></h2>
+<p>Using ROS on Windows is extremely annoying, so I have some recommendations to make it much better. I highly recommend you
+do these as well.</p>
+<p>First, let’s install a better terminal called Windows Terminal. Open the Microsoft Store and search for Windows Terminal.
+Then, just click Get and Install. Now, you can open up Windows Terminal by just typing <code class="code docutils literal notranslate"><span class="pre">wt</span></code> in the start menu.
+Windows Terminal allows you to have multiple tabs, better shortcuts, and just looks much cooler.</p>
+<p>Next, let’s add some utility functions to our powershell profile to make using ROS much simpler.</p>
+<p>Before building any ROS 2 workspace, you need to launch a powershell developer shell. Instead of having to launch a separate
+terminal, you can just use this utility function called <code class="code docutils literal notranslate"><span class="pre">setupDev</span></code> to make your current terminal have the same properties.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">setupDev</span> <span class="p">{</span>
+  <span class="nv">$dir</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Item</span> <span class="p">.).</span><span class="n">FullName</span>
+  <span class="nv">$vsPath</span> <span class="p">=</span> <span class="p">&amp;(</span><span class="nb">Join-Path</span> <span class="p">${</span><span class="n">env</span><span class="p">:</span><span class="n">ProgramFiles</span><span class="p">(</span><span class="n">x86</span><span class="p">)}</span> <span class="s2">&quot;\Microsoft Visual Studio\Installer\vswhere.exe&quot;</span><span class="p">)</span> <span class="n">-property</span> <span class="n">installationpath</span>
+  <span class="nb">Import-Module</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="nv">$vsPath</span> <span class="s2">&quot;Common7\Tools\Microsoft.VisualStudio.DevShell.dll&quot;</span><span class="p">)</span>
+  <span class="nb">Enter-VsDevShell</span> <span class="n">-VsInstallPath</span> <span class="nv">$vsPath</span> <span class="n">-SkipAutomaticLocation</span> <span class="n">-DevCmdArguments</span> <span class="n">-arch</span><span class="p">=</span><span class="n">x64</span>
+  <span class="nb">cd </span><span class="nv">$dir</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Another issue is when there are CMake or compiler errors with MSVC, nothing is displayed. This is because error output
+is printed out to stdout instead of stderr and colcon doesn’t print it to the console. In order to show it, we need to enable the
+<code class="code docutils literal notranslate"><span class="pre">console_cohesion</span></code> event handler.</p>
+<p>Also, when building ROS 2 workspaces, using the default build system MSBuild is very slow. Ninja is a much faster build system.
+In addition, when using MSBuild, <code class="code docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">build</span></code> will always rebuild even if no code was changed. However, in order
+to use Ninja, you need to add <code class="code docutils literal notranslate"><span class="pre">--cmake-args</span> <span class="pre">-G</span> <span class="pre">Ninja</span></code> to every single build command which can get annoying.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">colconBuild</span> <span class="p">{</span>
+  <span class="n">colcon</span> <span class="n">build</span> <span class="p">-</span><span class="n">-event-handlers</span> <span class="n">console_cohesion</span><span class="p">+</span> <span class="p">-</span><span class="n">-cmake-args</span> <span class="n">-G</span> <span class="n">Ninja</span> <span class="n">-DCMAKE_BUILD_TYPE</span><span class="p">=</span><span class="n">RelWithDebInfo</span> <span class="nv">$args</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now, all that functionality can be used using <code class="code docutils literal notranslate"><span class="pre">colconBuild</span></code>. You can
+even add extra flags if you want: <code class="code docutils literal notranslate"><span class="pre">colconBuild</span> <span class="pre">--packages-skip-build-finished</span></code></p>
+</section>
+<section id="verifying-ros2-works">
+<h2>Verifying ROS2 Works<a class="headerlink" href="#verifying-ros2-works" title="Permalink to this heading"></a></h2>
+<p>In order to easily verify everything is installed and working correctly run the following commands and make sure there are no errors:</p>
+<p>In one terminal run <code class="code docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">demo_nodes_cpp</span> <span class="pre">talker</span></code> and in another terminal run <code class="code docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">demo_nodes_cpp</span> <span class="pre">listener</span></code>.
+If there are no errors while these run, that’s great and means that C++ nodes work for ROS2 on your machine!</p>
+<p>Next, in one terminal run <code class="code docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">demo_nodes_py</span> <span class="pre">talker</span></code> and in another terminal run <code class="code docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">demo_nodes_py</span> <span class="pre">listener</span></code>.
+If there are no errors while these run, that’s great and means that python nodes work for ROS2 on your machine!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installing-ros-mac.html" class="btn btn-neutral float-left" title="Installing ROS2 on macOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="virtual-machine.html" class="btn btn-neutral float-right" title="Virtual Machine" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Vanderbilt Robotics.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

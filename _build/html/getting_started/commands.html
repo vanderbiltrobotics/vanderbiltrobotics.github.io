@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Command Line Basics &mdash; ROS2 Lunabot  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/tabs.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Git Standards" href="git.html" />
+    <link rel="prev" title="Visual Studio Code" href="vs-code.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ROS2 Lunabot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lunabotics.html">Intro to Lunabotics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-ros-linux.html">Installing ROS2 on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-ros-mac.html">Installing ROS2 on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-ros-windows.html">Installing ROS2 on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine.html">Virtual Machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repo-setup.html">Repository Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vs-code.html">Visual Studio Code</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#other-useful-unix-commands">Other Useful Unix Commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">Git Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="best-practices.html">Best Practices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Intro Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../projects/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project1.html">Project 1: Keyboard Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project2.html">Project 2: State Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Important Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ros.html">ROS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/msgs.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/odometry.html">Odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/coord-frames.html">Coordinate Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/rotation.html">Representing Rotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/slam.html">Localization &amp; Mapping</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MoveIt, From Start to Finish</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/urdf.html">Modeling the robot: URDFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/moveit.html">Moving your model: MoveIt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/hardware.html">ROS2 Control Hardware</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">State Machine</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../state_machine/index.html">Basics &amp; Setting Up States</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROS Phoenix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/design.html">Package Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Teleop Control</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../teleop_control/index.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Realsense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTABMAP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Navigation2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Lidar</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/installation.html">Urg Node Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/electrical-setup.html">Electrical Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchurgnode.html">Launch Urg Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchlocalization.html">Launch Localization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/parameters.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/localizationtheory.html">Localization Theory</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ROS2 Lunabot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Command Line Basics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting_started/commands.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="command-line-basics">
+<h1>Command Line Basics<a class="headerlink" href="#command-line-basics" title="Permalink to this heading"></a></h1>
+<p>A lot of work on the programming team involves the terminal so here is a quick reference for
+getting comfortable with working in the terminal. Note that linux and macOS are both Unix operating systems.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-VW5peA==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-VW5peA==" name="VW5peA==" role="tab" tabindex="0">Unix</button><button aria-controls="panel-0-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-0-VW5peA==" class="sphinx-tabs-panel group-tab" id="panel-0-VW5peA==" name="VW5peA==" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;folder-name&gt;<span class="w">                  </span><span class="c1"># Change current directory to specified folder</span>
+<span class="nb">pwd</span><span class="w">                               </span><span class="c1"># Print working directory</span>
+ls<span class="w">                                </span><span class="c1"># List files &amp; folders in the working directory</span>
+clear<span class="w">                             </span><span class="c1"># Clear the terminal screen (shortcut: ctrl + l)</span>
+rm<span class="w"> </span>&lt;file-name&gt;<span class="w">                    </span><span class="c1"># Remove a file</span>
+rm<span class="w"> </span>-rf<span class="w"> </span>&lt;folder-name&gt;<span class="w">              </span><span class="c1"># Delete a folder</span>
+mv<span class="w"> </span>&lt;source-name&gt;<span class="w"> </span>&lt;dest-name&gt;<span class="w">      </span><span class="c1"># Move/rename a file</span>
+cp<span class="w"> </span>&lt;source-name&gt;<span class="w"> </span>&lt;dest-name&gt;<span class="w">      </span><span class="c1"># Copy a file</span>
+cp<span class="w"> </span>-R<span class="w"> </span>&lt;source-name&gt;<span class="w"> </span>&lt;dest-name&gt;<span class="w">   </span><span class="c1"># Copy a folder</span>
+top<span class="w">                               </span><span class="c1"># Show CPU usage</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;folder-name&gt;<span class="w">                  </span><span class="c1"># Change current directory to specified folder</span>
+<span class="nb">cd</span><span class="w">                                </span><span class="c1"># Print working directory</span>
+dir<span class="w">                               </span><span class="c1"># List files &amp; folders in the working directory</span>
+cls<span class="w">                               </span><span class="c1"># Clear the terminal screen (shortcut: ctrl + l)</span>
+del<span class="w"> </span>&lt;file-name&gt;<span class="w">                   </span><span class="c1"># Remove a file</span>
+deltree<span class="w"> </span>&lt;folder-name&gt;<span class="w">             </span><span class="c1"># Delete a folder</span>
+move<span class="w"> </span>&lt;source-name&gt;<span class="w"> </span>&lt;dest-name&gt;<span class="w">    </span><span class="c1"># Move/rename a file</span>
+copy<span class="w"> </span>&lt;source-name&gt;<span class="w"> </span>&lt;dest-name&gt;<span class="w">    </span><span class="c1"># Copy a file</span>
+xcopy<span class="w"> </span>&lt;source-name&gt;<span class="w"> </span>&lt;dest-name&gt;<span class="w">   </span><span class="c1"># Copy a folder</span>
+mem<span class="w">                               </span><span class="c1"># Show CPU usage</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In order to go into the parent folder use <code class="code docutils literal notranslate"><span class="pre">cd</span> <span class="pre">..</span></code></p>
+</div>
+<section id="other-useful-unix-commands">
+<h2>Other Useful Unix Commands<a class="headerlink" href="#other-useful-unix-commands" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">which</span></code> shows where an executable is installed on the path (ex: <code class="code docutils literal notranslate"><span class="pre">which</span> <span class="pre">python</span></code>)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">shutdown</span></code> must be run on the Jetson to properly shut it down before removing power source.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">ctrl</span></code> + <code class="code docutils literal notranslate"><span class="pre">c</span></code> will stop anything executing in the terminal (this is how you stop a node)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">code</span> <span class="pre">.</span></code> will open the current directory in vscode if vscode was added to the path as <code class="code docutils literal notranslate"><span class="pre">code</span></code></p></li>
+<li><dl class="simple">
+<dt>Use the pipe operator <code class="code docutils literal notranslate"><span class="pre">|</span></code> to send output to another command:</dt><dd><ul>
+<li><p>Ex: In order to find a file in a huge directory: <code class="code docutils literal notranslate"><span class="pre">ls</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">&lt;file-name&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">&lt;file-name&gt;</span></code> will give a file executable permissions (chmod stands for change mode)</p></li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">&gt;</span></code> will redirect the output from a previous command (e.g. <code class="code docutils literal notranslate"><span class="pre">ls</span> <span class="pre">&gt;</span> <span class="pre">list.txt</span></code> writes the directories to the file)</dt><dd><ul>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&gt;&gt;</span></code> will append the output to the end of an existing file while <code class="code docutils literal notranslate"><span class="pre">&gt;</span></code> overwrites</p></li>
+<li><p>Ex: <code class="code docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;source</span> <span class="pre">/opt/ros/foxy</span> <span class="pre">&gt;&gt;</span> <span class="pre">.bashrc</span></code> will append the sourcing command to your bashrc</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><a class="reference external" href="http://www.penguintutor.com/linux/command-basics-reference">More on Redirecting Output, Input, &amp; Errors</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vs-code.html" class="btn btn-neutral float-left" title="Visual Studio Code" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="git.html" class="btn btn-neutral float-right" title="Git Standards" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Vanderbilt Robotics.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

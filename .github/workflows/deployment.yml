@@ -3,11 +3,11 @@ on:
   push: 
     branches: [main]
 
-env:
-  ROADMAP_GA_SECRET: ${{ secrets.GA_SECRET }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-  CI: true 
-  NEXT_TELEMETRY_DISABLED: 1
+# env:
+#   ROADMAP_GA_SECRET: ${{ secrets.GA_SECRET }}
+#   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+#   CI: true 
+#   NEXT_TELEMETRY_DISABLED: 1
 
 jobs:
   build:

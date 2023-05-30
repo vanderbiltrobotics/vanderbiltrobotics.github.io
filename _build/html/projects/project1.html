@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project 1: Keyboard Node &mdash; ROS2 Lunabot  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Project 2: State Machine" href="project2.html" />
+    <link rel="prev" title="Overview" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ROS2 Lunabot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/lunabotics.html">Intro to Lunabotics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-linux.html">Installing ROS2 on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-mac.html">Installing ROS2 on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-windows.html">Installing ROS2 on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/virtual-machine.html">Virtual Machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/repo-setup.html">Repository Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/vs-code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/commands.html">Command Line Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/git.html">Git Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/best-practices.html">Best Practices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Intro Projects</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Project 1: Keyboard Node</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#objectives">Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#keyboard-library">Keyboard Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-your-node">Test your Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch-files-in-python-packages">Launch Files in Python Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="project2.html">Project 2: State Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Important Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ros.html">ROS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/msgs.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/odometry.html">Odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/coord-frames.html">Coordinate Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/rotation.html">Representing Rotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/slam.html">Localization &amp; Mapping</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MoveIt, From Start to Finish</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/urdf.html">Modeling the robot: URDFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/moveit.html">Moving your model: MoveIt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/hardware.html">ROS2 Control Hardware</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">State Machine</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../state_machine/index.html">Basics &amp; Setting Up States</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROS Phoenix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/design.html">Package Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Teleop Control</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../teleop_control/index.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Realsense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTABMAP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Navigation2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Lidar</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/installation.html">Urg Node Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/electrical-setup.html">Electrical Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchurgnode.html">Launch Urg Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchlocalization.html">Launch Localization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/parameters.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/localizationtheory.html">Localization Theory</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ROS2 Lunabot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Project 1: Keyboard Node</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/projects/project1.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="project-1-keyboard-node">
+<h1>Project 1: Keyboard Node<a class="headerlink" href="#project-1-keyboard-node" title="Permalink to this heading"></a></h1>
+<p>In order to get familiar with how python nodes are written in ROS2, go through <a class="reference external" href="https://docs.ros.org/en/foxy/Tutorials/Writing-A-Simple-Py-Publisher-And-Subscriber.html">this</a> tutorial
+written by the ROS2 developers. Once you have an idea of how to write a python node, you should get started on this project which will have you do exactly that!</p>
+<section id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Create a ROS2 <a class="reference external" href="https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html">python package</a></p></li>
+<li><p>Create a ROS2 <a class="reference external" href="https://docs.ros.org/en/foxy/Tutorials/Writing-A-Simple-Py-Publisher-And-Subscriber.html">node</a> that publishes data to a topic</p></li>
+<li><p>Create a ROS2 <a class="reference external" href="https://roboticsbackend.com/ros2-launch-file-example/">launch file in python</a></p></li>
+<li><p>Use common ROS2 <a class="reference external" href="https://docs.ros.org/en/foxy/Tutorials/Topics/Understanding-ROS2-Topics.html">commands and tools</a> to test/debug your node</p></li>
+</ul>
+</section>
+<section id="keyboard-library">
+<h2>Keyboard Library<a class="headerlink" href="#keyboard-library" title="Permalink to this heading"></a></h2>
+<p>To help keep the focus on learning ROS2 you will use an external python package to handle the low-level details of communicating with the keyboard.
+To install the package, run <code class="code docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pynput</span></code> (or <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pynput</span></code> on Windows).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Install pynput package globally. Do not use python virutal environments since ROS doesn’t work well with them.</p>
+</div>
+<p>All the code you will need to communicate with the keyboard is below but you will still need to write the node and integrate the following code into it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pynput</span> <span class="kn">import</span> <span class="n">keyboard</span>
+
+<span class="n">listener</span> <span class="o">=</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">callback_function</span><span class="p">)</span>
+<span class="n">listener</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The above code basically makes a call to the user defined <code class="code docutils literal notranslate"><span class="pre">callback_function</span></code> with a <a class="reference external" href="https://pynput.readthedocs.io/en/latest/_modules/pynput/keyboard/_base.html#KeyCode">KeyCode</a> object passed as a parameter whenever an alphanumeric key is pressed down on your keyboard.
+It is up to you to write the functionality for <code class="code docutils literal notranslate"><span class="pre">def</span> <span class="pre">callback_function(self,</span> <span class="pre">data)</span></code> in your node’s class for when a key is pressed and integrate it within a ROS2 node to publish the key being
+pressed to the <code class="code docutils literal notranslate"><span class="pre">/keystrokes</span></code> topic. Note the data parameter is of type KeyCode which can easily be cast to a string using <code class="code docutils literal notranslate"><span class="pre">str(data)</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While writing a node is possible with OOP (see any ROS1 node), we will be using OOP as seen in the ROS2 tutorials</p>
+</div>
+<p>You will use a launch file to run your node in order to test it (running a node directly from terminal exists but is bad practice).
+Follow <a class="reference external" href="https://docs.ros.org/en/foxy/Tutorials/Launch-Files/Creating-Launch-Files.html">this tutorial</a> to learn how to write a launch file before making a launch file for your keyboard node.</p>
+</section>
+<section id="test-your-node">
+<h2>Test your Node<a class="headerlink" href="#test-your-node" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Write a python launch file to run the node</p></li>
+<li><p>Launch your launch file to run the node you wrote</p></li>
+<li><p>Open a seperate terminal and echo the topic you are publishing to</p></li>
+<li><p>Verify the correct keys are being published when you type</p></li>
+</ul>
+</section>
+<section id="launch-files-in-python-packages">
+<h2>Launch Files in Python Packages<a class="headerlink" href="#launch-files-in-python-packages" title="Permalink to this heading"></a></h2>
+<p>The link in the objectives section gives a good overview of using launch files.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Launch files can be written in python, xml, or yaml, but we use python because it is the ROS2 way
+Launch files can be used to run nodes in either a python package or a CMake (C++) package</p>
+</div>
+<p>Using launch files in python packages has a few quirks that should be noted:</p>
+<ol class="arabic simple">
+<li><p>You must define the executable for your node in <code class="code docutils literal notranslate"><span class="pre">setup.py</span></code></p></li>
+<li><p>You must also remember to copy over the launch files to the build and install folders by specifying them in <code class="code docutils literal notranslate"><span class="pre">setup.py</span></code></p></li>
+<li><p>Launch file names should follow the format <code class="code docutils literal notranslate"><span class="pre">&lt;description&gt;.launch.py</span></code></p></li>
+</ol>
+<p>Your keyboard package’s <code class="code docutils literal notranslate"><span class="pre">setup.py</span></code> should be modified to address the above quirks:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+
+<span class="o">...</span>
+    <span class="c1"># Allows launch files to be found when called</span>
+    <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
+        <span class="o">...</span>
+        <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;share&#39;</span><span class="p">,</span> <span class="n">package_name</span><span class="p">),</span> <span class="n">glob</span><span class="p">(</span><span class="s1">&#39;launch/*.launch.py&#39;</span><span class="p">))</span>
+    <span class="p">],</span>
+<span class="o">...</span>
+    <span class="c1"># Defines the executables for the node that are used in the launch file</span>
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s1">&#39;&lt;executable_name&gt; = &lt;package_name&gt;.&lt;file_name&gt;:main&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="project2.html" class="btn btn-neutral float-right" title="Project 2: State Machine" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Vanderbilt Robotics.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

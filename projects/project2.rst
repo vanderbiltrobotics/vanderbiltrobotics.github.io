@@ -28,5 +28,5 @@ There are 3 options for how to use a node in a state:
 3) The state constructor can take in a :code:`Node` as a parameter
 
 Test your States
-==============
+================
 Run the state machine and ensure it works according to the specs by observing the ouputs logged to the terminal

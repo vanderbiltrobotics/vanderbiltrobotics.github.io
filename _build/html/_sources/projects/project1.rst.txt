@@ -1,0 +1,83 @@
+************************
+Project 1: Keyboard Node
+************************
+
+In order to get familiar with how python nodes are written in ROS2, go through `this <https://docs.ros.org/en/foxy/Tutorials/Writing-A-Simple-Py-Publisher-And-Subscriber.html>`_ tutorial
+written by the ROS2 developers. Once you have an idea of how to write a python node, you should get started on this project which will have you do exactly that!
+
+Objectives
+==========
+- Create a ROS2 `python package <https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html>`_
+- Create a ROS2 `node <https://docs.ros.org/en/foxy/Tutorials/Writing-A-Simple-Py-Publisher-And-Subscriber.html>`_ that publishes data to a topic
+- Create a ROS2 `launch file in python <https://roboticsbackend.com/ros2-launch-file-example/>`_
+- Use common ROS2 `commands and tools <https://docs.ros.org/en/foxy/Tutorials/Topics/Understanding-ROS2-Topics.html>`_ to test/debug your node
+
+Keyboard Library
+================
+To help keep the focus on learning ROS2 you will use an external python package to handle the low-level details of communicating with the keyboard.
+To install the package, run :code:`python3 -m pip install pynput` (or :code:`pip install pynput` on Windows).
+
+.. warning::
+    Install pynput package globally. Do not use python virutal environments since ROS doesn't work well with them.
+
+All the code you will need to communicate with the keyboard is below but you will still need to write the node and integrate the following code into it:
+
+.. code-block:: python
+    
+    from pynput import keyboard
+
+    listener = keyboard.Listener(on_press=callback_function)
+    listener.start()
+
+The above code basically makes a call to the user defined :code:`callback_function` with a `KeyCode <https://pynput.readthedocs.io/en/latest/_modules/pynput/keyboard/_base.html#KeyCode>`_ object passed as a parameter whenever an alphanumeric key is pressed down on your keyboard.
+It is up to you to write the functionality for :code:`def callback_function(self, data)` in your node's class for when a key is pressed and integrate it within a ROS2 node to publish the key being
+pressed to the :code:`/keystrokes` topic. Note the data parameter is of type KeyCode which can easily be cast to a string using :code:`str(data)`.
+
+.. note::
+    While writing a node is possible with OOP (see any ROS1 node), we will be using OOP as seen in the ROS2 tutorials
+
+You will use a launch file to run your node in order to test it (running a node directly from terminal exists but is bad practice).
+Follow `this tutorial <https://docs.ros.org/en/foxy/Tutorials/Launch-Files/Creating-Launch-Files.html>`_ to learn how to write a launch file before making a launch file for your keyboard node.
+
+Test your Node
+==============
+- Write a python launch file to run the node
+- Launch your launch file to run the node you wrote 
+- Open a seperate terminal and echo the topic you are publishing to
+- Verify the correct keys are being published when you type
+
+Launch Files in Python Packages
+===============================
+The link in the objectives section gives a good overview of using launch files.
+
+.. note:: 
+    Launch files can be written in python, xml, or yaml, but we use python because it is the ROS2 way
+    Launch files can be used to run nodes in either a python package or a CMake (C++) package
+
+Using launch files in python packages has a few quirks that should be noted:
+
+#. You must define the executable for your node in :code:`setup.py`
+#. You must also remember to copy over the launch files to the build and install folders by specifying them in :code:`setup.py`
+#. Launch file names should follow the format :code:`<description>.launch.py`
+
+Your keyboard package's :code:`setup.py` should be modified to address the above quirks:
+
+.. code-block:: python
+    
+    from setuptools import setup
+    import os
+    from glob import glob
+    
+    ...
+        # Allows launch files to be found when called
+        data_files=[
+            ...
+            (os.path.join('share', package_name), glob('launch/*.launch.py'))
+        ],
+    ...
+        # Defines the executables for the node that are used in the launch file
+        entry_points={
+            'console_scripts': [
+                    '<executable_name> = <package_name>.<file_name>:main',
+            ],
+        },

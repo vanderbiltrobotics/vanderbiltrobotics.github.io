@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basics &amp; Setting Up States &mdash; ROS2 Lunabot  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Overview" href="../ros_phoenix/overview.html" />
+    <link rel="prev" title="ROS2 Control Hardware" href="../moveit/hardware.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ROS2 Lunabot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/lunabotics.html">Intro to Lunabotics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-linux.html">Installing ROS2 on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-mac.html">Installing ROS2 on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-windows.html">Installing ROS2 on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/virtual-machine.html">Virtual Machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/repo-setup.html">Repository Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/vs-code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/commands.html">Command Line Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/git.html">Git Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/best-practices.html">Best Practices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Intro Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../projects/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project1.html">Project 1: Keyboard Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project2.html">Project 2: State Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Important Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ros.html">ROS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/msgs.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/odometry.html">Odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/coord-frames.html">Coordinate Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/rotation.html">Representing Rotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/slam.html">Localization &amp; Mapping</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MoveIt, From Start to Finish</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/urdf.html">Modeling the robot: URDFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/moveit.html">Moving your model: MoveIt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/hardware.html">ROS2 Control Hardware</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">State Machine</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basics &amp; Setting Up States</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-set-up-a-state">How To Set Up A State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-state-machine">Running the State Machine</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROS Phoenix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/design.html">Package Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Teleop Control</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../teleop_control/index.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Realsense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTABMAP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Navigation2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Lidar</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/installation.html">Urg Node Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/electrical-setup.html">Electrical Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchurgnode.html">Launch Urg Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchlocalization.html">Launch Localization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/parameters.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/localizationtheory.html">Localization Theory</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ROS2 Lunabot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Basics &amp; Setting Up States</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/state_machine/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="basics-setting-up-states">
+<h1>Basics &amp; Setting Up States<a class="headerlink" href="#basics-setting-up-states" title="Permalink to this heading"></a></h1>
+<p>Relevant package: <a class="reference external" href="https://github.com/vanderbiltrobotics/lunabot-ros2/tree/main/state_machine">state_machine</a></p>
+<p>Robots typically operate in different states. When our robot starts up, it needs to localize,
+move to the digging area, dig there, move to the deposotion area, deposit, and then repeat. Each of
+these can be thought of as a different “state”, and all the robot does is move from state to state
+as it completes its tasks. The state_machine package provides the framework for setting up and moving
+between states, and provides a useful logging infrasturcture for use within states.</p>
+<section id="how-to-set-up-a-state">
+<h2>How To Set Up A State<a class="headerlink" href="#how-to-set-up-a-state" title="Permalink to this heading"></a></h2>
+<p>In the tests folder of the <code class="code docutils literal notranslate"><span class="pre">state_machine</span></code> pacakge, there are a few sample states.
+<strong>This is probably your best reference for this package, because these tests
+make up a full state machine.</strong> We recommend you run <code class="code docutils literal notranslate"><span class="pre">python3</span> <span class="pre">main.py</span></code>
+in the tests folder to check out this sample state machine.
+Let’s take a look at a sample state in the tests – in this case, this is a Navigation state that moves
+the robot to a given pose.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure you’ve run <code class="code docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">build</span></code> on our workspace and sourced it,
+in order to get access to the state_machine package!</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">state_machine</span> <span class="kn">import</span> <span class="n">State</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">import</span> <span class="nn">find_charuco</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">class</span> <span class="nc">Navigation</span><span class="p">(</span><span class="n">State</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pose</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">executors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">Navigation</span><span class="o">.</span><span class="n">go_to_pose</span><span class="p">,</span>
+            <span class="n">Navigation</span><span class="o">.</span><span class="n">check_map_lost</span><span class="p">,</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">go_to_pose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">goal_pose</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;goal_pose&quot;</span><span class="p">]</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">goal_pose</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">goal_pose</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current Pose: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">goal_pose</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">goal_pose</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.1</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">check_map_lost</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">find_charuco</span><span class="o">.</span><span class="n">FindCharuco</span><span class="p">(),</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<p>Let’s take a look at the important parts of this file, starting from the top.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">state_machine</span> <span class="kn">import</span> <span class="n">State</span>
+</pre></div>
+</div>
+<p><code class="code docutils literal notranslate"><span class="pre">State</span></code> is an abstract class from the state_machine package, and it’s what
+all states you create should inherit from.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Navigation</span><span class="p">(</span><span class="n">State</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>And here’s that inheritance.</p>
+<p>Now, this state machine library has been set up to allow for each state to
+execute multiple functions in parallel (at the same time). We call each of these functions <strong>executors</strong>.
+In this state, you can see that there are two exectors – <code class="code docutils literal notranslate"><span class="pre">go_to_pose</span></code> and <code class="code docutils literal notranslate"><span class="pre">check_map_lost</span></code>.
+When you enter the Navigation state, both executors will be started, and will
+run in parallel. In this case, the <code class="code docutils literal notranslate"><span class="pre">go_to_pose</span> <span class="pre">executor</span></code> moves the robot to
+the pose, while <code class="code docutils literal notranslate"><span class="pre">check_map_lost</span></code> checks to see if mapping has lost the map.</p>
+<p>Executors must be registered via the <code class="code docutils literal notranslate"><span class="pre">executors</span></code> function, whose only argument is self and returns
+a list of all executors that the state should run. If you forget to do this, you will not be able to instantiate the class.</p>
+<p>The first executor that returns determines which state the state machine
+will go to next. For example, if we lose the map (and let’s face it, we probably will), <code class="code docutils literal notranslate"><span class="pre">check_map_lost</span></code>
+will detect that and return a tuple – a constructed object of the state to move to next
+(in this case, <code class="code docutils literal notranslate"><span class="pre">FindCharuco()</span></code>), and any arguments you want to give that state
+(in a map: e.g. <code class="code docutils literal notranslate"><span class="pre">{&quot;arg1&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;arg2&quot;,</span> <span class="pre">2}</span></code>). Future states can use the arguments you
+put in the map to change their behavior. You can actually see
+that in this state – in <code class="code docutils literal notranslate"><span class="pre">go_to_pose</span></code>, <code class="code docutils literal notranslate"><span class="pre">goal_pose</span></code> is from <code class="code docutils literal notranslate"><span class="pre">kwargs</span></code>, which means
+it came from the arguments of the previous state.</p>
+<p>This is another important feature of this state machine library – states can pass information
+to each other to change their behavior. Here’s another potential use case for this
+(not in our tests, just an example of what this might look like).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">state_machine</span> <span class="kn">import</span> <span class="n">State</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">import</span> <span class="nn">back_up</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">class</span> <span class="nc">Navigation</span><span class="p">(</span><span class="n">State</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pose</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">executors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">Navigation</span><span class="o">.</span><span class="n">go_to_pose</span><span class="p">,</span>
+            <span class="n">Navigation</span><span class="o">.</span><span class="n">check_map_lost</span><span class="p">,</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">go_to_pose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">goal_pose</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;goal_pose&quot;</span><span class="p">]</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">goal_pose</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">goal_pose</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current Pose: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">goal_pose</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">goal_pose</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.1</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">check_map_lost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">back_up</span><span class="o">.</span><span class="n">BackUp</span><span class="p">(),</span> <span class="p">{</span>
+                    <span class="s2">&quot;return_to&quot;</span><span class="p">:</span> <span class="n">Navigation</span><span class="p">,</span>
+                    <span class="s2">&quot;goal_pose&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;goal_pose&quot;</span><span class="p">]</span>
+                <span class="p">}</span>
+</pre></div>
+</div>
+<p>Look at <code class="code docutils literal notranslate"><span class="pre">check_map_lost</span></code>. Even if this exits Navigation to regain our map by backing up,
+the <code class="code docutils literal notranslate"><span class="pre">BackUp</span></code> state knows what state to return to (<code class="code docutils literal notranslate"><span class="pre">Navigation</span></code>) once it’s done regaining the map.
+You can even include <code class="code docutils literal notranslate"><span class="pre">Navigation</span></code>’s original arguments here, so <code class="code docutils literal notranslate"><span class="pre">BackUp</span></code> can pass them back to <code class="code docutils literal notranslate"><span class="pre">Navigation</span></code>.</p>
+<p>Executors can either have one or two parameters: <code class="code docutils literal notranslate"><span class="pre">self</span></code>, or <code class="code docutils literal notranslate"><span class="pre">self</span></code> and <code class="code docutils literal notranslate"><span class="pre">kwargs</span></code> (the argument map from the
+previous state). If you don’t need arguments, then you don’t need to include the <code class="code docutils literal notranslate"><span class="pre">kwargs</span></code> parameter.</p>
+<p>Finally, one more feature: instead of using the <code class="code docutils literal notranslate"><span class="pre">print</span></code> function, use <code class="code docutils literal notranslate"><span class="pre">self.log</span></code>. This will automatically print
+the name of the state along with your log message, allowing for smoother debugging.</p>
+</section>
+<section id="running-the-state-machine">
+<h2>Running the State Machine<a class="headerlink" href="#running-the-state-machine" title="Permalink to this heading"></a></h2>
+<p>In order to start the state machine, construct the intitial state and run its <code class="code docutils literal notranslate"><span class="pre">start()</span></code> function. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">find_charuco</span>
+<span class="n">find_charuco</span><span class="o">.</span><span class="n">FindCharuco</span><span class="p">()</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>States will move to their next states automatically, so only call <code class="code docutils literal notranslate"><span class="pre">start()</span></code> on the initial state.
+In order to end the state machine, <code class="code docutils literal notranslate"><span class="pre">return</span> <span class="pre">(None,</span> <span class="pre">{})</span></code> at the end of an executor
+(see the end of <code class="code docutils literal notranslate"><span class="pre">go_to_pose</span></code> for an example of this).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../moveit/hardware.html" class="btn btn-neutral float-left" title="ROS2 Control Hardware" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ros_phoenix/overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Vanderbilt Robotics.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
