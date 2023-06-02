@@ -1,0 +1,20 @@
+*******************
+Launch Localization
+*******************
+
+To launch the localization algorithm, colcon build the lidar_localization package and run:
+
+.. code-block:: bash
+
+    ros2 launch lidar_localization lidar_localization_circle.launch.py
+
+It is also necessary to run a static trasfrom between base_link and laser to make this node work:
+.. code-block:: bash
+
+    ros2 run tf2_ros static_transform_publisher 0 0 0 3.14 0 0 "base_link" "laser"
+
+This can be viewed in RVIZ through the tf topic (by clicking add in the bottom left, going to By display type, and adding TF).
+
+Note: A list of localization parameters can be found in :code:`lidar_localization/config/lidar_localization_circle.yaml`. Meanings for these values can be found in the parameters documentation.
+
+This algorithm outputs a transform between the odom and base_link frames.

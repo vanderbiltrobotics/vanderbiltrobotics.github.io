@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intro to Lunabotics &mdash; ROS2 Lunabot  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installing ROS2 on Linux" href="installing-ros-linux.html" />
+    <link rel="prev" title="VU Robotics ROS2 documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ROS2 Lunabot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Intro to Lunabotics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#competition">Competition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arena-layout">Arena Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#our-sensors-hardware">Our Sensors &amp; Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-design">System Design</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installing-ros-linux.html">Installing ROS2 on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-ros-mac.html">Installing ROS2 on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-ros-windows.html">Installing ROS2 on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine.html">Virtual Machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repo-setup.html">Repository Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vs-code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Command Line Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">Git Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="best-practices.html">Best Practices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Intro Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../projects/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project1.html">Project 1: Keyboard Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project2.html">Project 2: State Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Important Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ros.html">ROS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/msgs.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/odometry.html">Odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/coord-frames.html">Coordinate Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/rotation.html">Representing Rotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/slam.html">Localization &amp; Mapping</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MoveIt, From Start to Finish</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/urdf.html">Modeling the robot: URDFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/moveit.html">Moving your model: MoveIt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/hardware.html">ROS2 Control Hardware</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">State Machine</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../state_machine/index.html">Basics &amp; Setting Up States</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROS Phoenix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/design.html">Package Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Teleop Control</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../teleop_control/index.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Realsense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTABMAP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Navigation2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Lidar</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/installation.html">Urg Node Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/electrical-setup.html">Electrical Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchurgnode.html">Launch Urg Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchlocalization.html">Launch Localization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/parameters.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/localizationtheory.html">Localization Theory</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ROS2 Lunabot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Intro to Lunabotics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting_started/lunabotics.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="intro-to-lunabotics">
+<h1>Intro to Lunabotics<a class="headerlink" href="#intro-to-lunabotics" title="Permalink to this heading"></a></h1>
+<p>This document provides a high level overview of what our robot needs to do in order to perform well in the NASA Lunabotics competition and how we aim to achieve this performance.</p>
+<section id="competition">
+<h2>Competition<a class="headerlink" href="#competition" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://www.nasa.gov/sites/default/files/atoms/files/lunabotics_guidebook_2022_-_ver_1_1.pdf">Here</a> are the official rules for the upcoming 2022 competition. The competition can be summarized as:</p>
+<ol class="arabic simple">
+<li><p>The robot is started in an obstacle free area near the deposition bin</p></li>
+<li><p>The robot must figure out where it is in relation to the deposition bin (localize)</p></li>
+<li><p>The robot must navigate through an obstacle zone to the mining area (mapping &amp; navigation)</p></li>
+<li><p>Once in the mining area, the robot must dig up rocks from under the sand and store them in the onboard deposition bucket (arm control &amp; planning)</p></li>
+<li><p>The robot must navigate back through the obstacle zone to the deposition bin (mapping, navigation, &amp; localization)</p></li>
+<li><p>The robot must dump all the rocks into the deposition bin (deposition control)</p></li>
+<li><p>Repeat steps 3 through 6 as many times as possible in the alloted time in order to deposit the largest mass of rocks.</p></li>
+</ol>
+<p>The goal on the programming team is to complete all of the above steps completely autonomously, that is without ever having any human input. If we can do all of the above completely autonomously we have a very strong shot at winning the Nasa Lunabotics competition in May!</p>
+</section>
+<section id="arena-layout">
+<h2>Arena Layout<a class="headerlink" href="#arena-layout" title="Permalink to this heading"></a></h2>
+<p>For quick reference, here is the field layout from the 2022 rulebook:
+<img alt="Field Layout" src="../_images/field-layout.png" /></p>
+<p>Here are the dimensions of the deposition bin. Note that we are allowed to hang stuff from the deposition bin as well as have a board behind the bin between the two pvc pipes.
+<img alt="Deposition Bin" src="../_images/deposition-bin.png" /></p>
+</section>
+<section id="our-sensors-hardware">
+<h2>Our Sensors &amp; Hardware<a class="headerlink" href="#our-sensors-hardware" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Realsense D435i (Depth Camera &amp; Imu)</strong>:</p>
+<ul>
+<li><p>Provides a RGB image with depth information (so therefore refered to as an RGBD image)</p></li>
+<li><p>Also provides orientation and acceleration data from the buit in inertial measurement unit (IMU)</p>
+<ul>
+<li><p>Sadly we can’t use the orientation data because the competition constrains us to a moon environment where this data would not be available</p></li>
+</ul>
+</li>
+<li><p>Connect to the onboard computer using a USB 3.0 cable</p></li>
+</ul>
+</li>
+<li><p><strong>Hokuyo UTM-30LX-EW Laser Range Finder (Lidar)</strong>: provides a 2D laser scan of the environment in a 270 degree field of view</p>
+<ul>
+<li><p>Connects to the onboard computer using an ethernet cable</p></li>
+</ul>
+</li>
+<li><p><strong>Potentiometers</strong>: measure the angle of the arm joints and connect to the CAN bus for communication with the computer</p></li>
+<li><p><strong>Onboard Computer</strong>: Currently a Jetson Xavier AGX but will likely be a Intel NUC in the future for a more powerful CPU</p></li>
+<li><p><strong>CAN Bus</strong>: A network of CAN wires used for communication between the motor controllers and the onboard computer</p></li>
+<li><p><strong>Talon SRX Motor Controllers</strong>: Control the motors according to the commands received via the CAN bus</p></li>
+</ul>
+</section>
+<section id="system-design">
+<h2>System Design<a class="headerlink" href="#system-design" title="Permalink to this heading"></a></h2>
+<p>This is our preliminary design for achieving full autonomy for the 2022 competition:</p>
+<ul class="simple">
+<li><p>Figure out the position of the robot in relation to the deposition bin (localize against the deposition bin) using the lidar and in-house developed math</p></li>
+<li><p>Map the environment and any obstacles using the Realsense camera and a 3rd party mapping library (RTABMAP)</p></li>
+<li><p>Navigate to positions on the map using a 3rd party navigation library (Nav2) for planning and publishing command velocities for the robot to follow</p></li>
+<li><p>Move the excavation arm to dig rocks and deposit them in bucket using potentiometers to determine position of arm joints and a 3rd party library (MoveIt2) for planning and publishing the trajectory of the arm</p></li>
+<li><p>Dump the bucket using a motor encoder to determine when the bucket has dumped (based on the predetermined number of motor revolutions)</p></li>
+<li><p>Control the motors using ros_phoenix library</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="VU Robotics ROS2 documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installing-ros-linux.html" class="btn btn-neutral float-right" title="Installing ROS2 on Linux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Vanderbilt Robotics.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROS Overview &mdash; ROS2 Lunabot  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Messages" href="msgs.html" />
+    <link rel="prev" title="Overview" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ROS2 Lunabot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/lunabotics.html">Intro to Lunabotics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-linux.html">Installing ROS2 on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-mac.html">Installing ROS2 on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing-ros-windows.html">Installing ROS2 on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/virtual-machine.html">Virtual Machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/repo-setup.html">Repository Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/vs-code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/commands.html">Command Line Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/git.html">Git Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/best-practices.html">Best Practices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Intro Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../projects/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project1.html">Project 1: Keyboard Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/project2.html">Project 2: State Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Important Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ROS Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-ros">What is ROS?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#packages-in-ros">Packages in ROS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="msgs.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="odometry.html">Odometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coord-frames.html">Coordinate Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rotation.html">Representing Rotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slam.html">Localization &amp; Mapping</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MoveIt, From Start to Finish</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/urdf.html">Modeling the robot: URDFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/moveit.html">Moving your model: MoveIt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit/hardware.html">ROS2 Control Hardware</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">State Machine</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../state_machine/index.html">Basics &amp; Setting Up States</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROS Phoenix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros_phoenix/design.html">Package Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Teleop Control</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../teleop_control/index.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Realsense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTABMAP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtabmap/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Navigation2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/launch.html">Launch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/parameters.html">Parameters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Lidar</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/installation.html">Urg Node Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/electrical-setup.html">Electrical Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchurgnode.html">Launch Urg Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/launchlocalization.html">Launch Localization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/parameters.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lidar/localizationtheory.html">Localization Theory</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ROS2 Lunabot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ROS Overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/concepts/ros.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ros-overview">
+<h1>ROS Overview<a class="headerlink" href="#ros-overview" title="Permalink to this heading"></a></h1>
+<section id="what-is-ros">
+<h2>What is ROS?<a class="headerlink" href="#what-is-ros" title="Permalink to this heading"></a></h2>
+<p>ROS stands for Robot Operating System. While the name suggests it is an operating system, that is not really the case as it operates more like a framework for developing robotics applications and must still run on an underlying OS such as Ubuntu.</p>
+<p>Using ROS allows us to run a network of nodes that communicate to each other by publishing messages containing relevant data to topics. Other nodes can then subscribe to those topics to retrieve those messages.</p>
+<p><img alt="GIF of Nodes + Topics" src="https://docs.ros.org/en/foxy/_images/Topic-MultiplePublisherandMultipleSubscriber.gif" /></p>
+<p>For instance, in order to detect objects in a camera frame we would have the following node structure:</p>
+<p>The camera driver node would take the incoming images from the camera and publish them as an img message to the <code class="docutils literal notranslate"><span class="pre">/camera_image</span></code> topic. Multiple nodes can now subscribe to this camera topic to perform different functions such as detecting objects in the robot’s path. ROS handles directing messages to where they need to go and allows us to focus on writing nodes to do what we want.</p>
+<p>The pub-sub architechture in ROS allows nodes to be run on seperate computers and still communicate with each other. This helps a lot with multiple robots communicating or with offboarding some heavy computation to a seperate computer from the robot.</p>
+<p>While looking at the <a class="reference external" href="https://docs.ros.org/en/foxy/Tutorials.html">ROS2 tutorials</a> can seem intimidating with so many topics such as actions, services, and plugins, you don’t need to worry because most all of our repository relies on only the simple publishing and subscribing abilities of nodes. This means you can focus your efforts on learning the core of ROS– writing and launching nodes to publish and subscribe to data –and not worry about the more advanced topics that can be explored later on.</p>
+</section>
+<section id="packages-in-ros">
+<h2>Packages in ROS<a class="headerlink" href="#packages-in-ros" title="Permalink to this heading"></a></h2>
+<p>Packages are how we organize nodes in ROS. In order to do a complex task like mapping the environment, many nodes might be involved and then all of these nodes would be included in a single package and called <code class="docutils literal notranslate"><span class="pre">mapping</span></code> which also contains launch files for running the nodes.</p>
+<p>Just like how other developers will provide open source npm packages for people to use with their node.js projects, robotics developers often provide open source ROS packages that can be easily downloaded and run by other roboticists. Some of the main external packages we rely on for our robot are:</p>
+<ul class="simple">
+<li><p>RTABMAP: for mapping the environment and getting velocity estimates from the camera inputs</p></li>
+<li><p>Nav2: for taking the map from RTABMAP and planning a path around any obstacles to the goal position &amp; orientation on the map</p></li>
+<li><p>MoveIt2: for planning the arm’s trajectory to a goal position &amp; orientation</p></li>
+</ul>
+<p>Using these external packages is quite easy as all we have to do is install the package and then launch any of the nodes provided using any of the supplied launch files or by writing our own launch files to launch nodes from the package.
+In fact, many of the packages we write in our repository are to just contain the configuration and launch files necessary to use these external packages for our needs (ex: <code class="docutils literal notranslate"><span class="pre">navigation</span></code> )</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="msgs.html" class="btn btn-neutral float-right" title="Messages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Vanderbilt Robotics.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

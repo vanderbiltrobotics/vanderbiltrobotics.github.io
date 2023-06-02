@@ -1,0 +1,19 @@
+********
+Overview
+********
+
+This package is used to control the robot's arm, deposition, and drive systems using xbox controllers. 
+One controller is used to control the robot's arm and deposition system while a seperate controller is used
+to control the drive system. 
+
+:code:`arm.launch.py` launches a joy node for the arm and the :code:`arm_publisher` node that subscribes to the joy node
+and publishes a motor control message for each of the arm motors.
+:code:`drive.launch.py` launches a joy node for the drive system and the :code:`drive_publisher` node that subscribes to the
+joy node and publishes a motor control message for each of the 4 motors for the drive system. 
+
+.. note::
+    These launch files only launch the joystick related nodes, and will not result in the robot moving
+
+In order to actually move the robot, we need to launch the nodes for the arm and drive and the associated ros_phoenix nodes to subscribe to the motor control topics.
+Launch :code:`full_arm_launch.xml` and :code:`full_drive_launch.xml` which include both the teleop launch 
+files and the ros_phoenix launch files for the specific system.

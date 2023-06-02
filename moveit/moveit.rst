@@ -1,0 +1,193 @@
+**************************
+Moving your model: MoveIt
+**************************
+
+Relevant package: `moveit_arm <https://github.com/vanderbiltrobotics/lunabot-ros2/tree/main/moveit_arm>`_
+
+So now, you have your URDF. Great! But now, we have to get it
+to move from point A to point B. For a lot of manipulators, there are a few
+things that make this a difficult problem to solve just with hard-coded paths:
+
+- Many manipulators have obstacles they have to move around. For example, on our robot, 
+  the arm has to move around the deposition bucket -- one false move and you have a 
+  collision that could break the entire robot. 
+- Your manipulator may have to move to places it's never moved before.
+  For example, if your manipulator is grabbing something based
+  on some external input, you can't hardcode that, especially if there are
+  obstacles it has to get around. For our team, our arm has to dig deeper
+  and deeper, so the motion path it follows is never set in stone and thus
+  can't be hardcoded.
+- It's difficult to hardcode a path that can move multiple joints at different
+  speeds at the same time, so hard-coded paths won't be all that efficient, and they're
+  often difficult to change.
+
+To solve these problems, we use a package called MoveIt. MoveIt -- at least
+when it works correctly -- allows you to enter a final position (a "goal") for your 
+manipulator to move to. It then uses inverse kinematics to figure out how to
+get to that goal as quickly as possible without colliding with the rest of the robot,
+and then executes that trajectory. This execution is done with the help of ROS controllers,
+which interface between the created motion path and your actual hardware. 
+For now, we can remain (mostly) blisfully ignorant in the land of simulation -- MoveIt provides
+us with fake controllers that work with RViz.
+
+Creating a MoveIt Package
+--------------------------
+
+At least in MoveIt 1, there used to be a setup assistant that would set up your entire
+MoveIt package for you. MoveIt 2 doesn't have this. However, honestly, it wasn't that great, 
+and things got pretty confusing in there. We've ported it from scratch, and everything you need
+is already in our repository. All of this is based on the 
+`panda arm MoveIt ROS2 code <https://github.com/ros-planning/moveit_resources/blob/ros2/panda_moveit_config/launch/demo.launch.py>`_ -- we just
+ported everything from there and changed names to fit our use case. Here's an explanation of everything you need:
+
+Configuration
+~~~~~~~~~~~~~
+
+Most of MoveIt is just configuration files. Here are our important ones:
+
+excavation_moveit_controller_config.yaml (often named excavation_controllers.yaml,
+but frankly, this name is quite misleading):
+
+.. literalinclude:: ../../moveit_arm/config/excavation_moveit_controller_config.yaml
+    :language: yaml
+
+This file is what MoveIt uses to understand what ROS controllers you're using. 
+In this file, we're telling MoveIt to send messages to the :code:`excavation_controller`,
+and we're then saying that :code:`excavation_controller` expects :code:`FollowJointTrajectory` messages
+that describe the trajectory. In other words, :code:`excavation_controller` has a 
+follow joint trajectory action server that expects :code:`FollowJointTrajectory` messages -- 
+and this configuration file tells MoveIt where to sent its messages for the specified joints.
+
+Now, here's where things get confusing -- this configuration is deployed through something
+called the :code:`MoveItSimpleControllerManager`, which you'll see in the launch file. Think about
+this as a MoveIt system that manages connections to ROS controllers. It stores what ROS controllers it needs to
+work with, what types of messages their action servers want, and what joints each ROS controller works with.
+When MoveIt executes a path, it utilizes this information to make everything happen.
+
+excavation_ros_controllers.yaml:
+
+.. literalinclude:: ../../moveit_arm/config/excavation_ros_controllers.yaml
+    :language: yaml
+
+The :code:`controller_manager` is what loads the ROS controllers and actually
+talks with them. The JointTrajectoryController sends the trajectory it got 
+to your hardware interface (with the command types given)
+and reads back the hardware state from the interface for the controller's PID if it needs one
+(with the state types given). The JointStateBroadcaster broadcasts the hardware's state 
+so other programs can access it. All we have to do, in addition to this configuration, 
+is write the hardware interface plugin that talks with our specific hardware (discussed elsewhere).
+
+Here's the full process: MoveIt sends the action for a motion path as a 
+FollowJointTrajectory message to the :code:`excavation_controller`, which is a JointTrajectoryController. 
+This controller then communicates with the hardware interface (based on the command interfaces specified) to 
+execute the requested movement. The hardware interface returns the current state of the hardware (based on the 
+state interfaces specified) and relays it back to the JointStateBroadcaster and JointTrajectoryController,
+thus completing the cycle. 
+**The PID in the JointTrajectoryController is only used if the command interface is velocity or effort.**
+If this is the case, though, it's used throughout the path to smooth it. This is particularly important
+at the end of the motion path -- if MoveIt gives a problematic path (generally if it tries to executes faster than 
+physically possible), MoveIt doesn't replan if the hardware doesn't get to where it was supposed to; 
+it just gives up. However, the controller doesn't, and it uses its PID to get to the expected final state.
+This can be problematic if the errors are large -- the PID, after all, can't plan around obstacles and
+avoid collisions like MoveIt can.
+
+The JointStateBroadcaster broadcasts (publishes) /joint_states, which other programs use (including 
+the :code:`robot_state_publisher`, which publishes transforms for motion visualization).
+
+What a time to be alive. But wait, there's more.
+
+ROS2 control is set up as an xacro macro, which is eventaully inserted into the final URDF:
+
+.. literalinclude:: ../../moveit_arm/config/excavation.ros2_control.xacro
+    :language: xml
+
+:code:`<plugin>fake_components/GenericSystem</plugin>` is the ROS2 control plugin that
+is used to simulate ROS controllers without having hardware (i.e., with RViz).
+
+The initial positions file in here is just a YAML with initial positions; nothing special:
+
+.. literalinclude:: ../../moveit_arm/config/initial_positions.yaml
+    :language: yaml
+
+The ROS2 xacro macro is imported in a final URDF xacro file along with your actual URDF, 
+which is what MoveIt should ingest in its launch file so that way you can keep your structural URDF 
+separate from everything else:
+
+.. literalinclude:: ../../moveit_arm/config/excavation.urdf.xacro
+    :language: xml
+
+Launch
+~~~~~~
+:code:`ros2 launch moveit_arm demo.launch.py` launches RViz and MoveIt, with your URDF in it and the MoveIt
+motion planning plugin. Here are all of the nodes in the launch file, along with what they do:
+
+- move_group: Move Group is the MoveIt node. It handles motion planning and the MoveIt
+  side of controllers (:code:`excavation_controllers.yaml`).
+- rviz: The RViz node launches RViz with a preset configuration (loads the model and
+  opens the MotionPlanning plugin with annoying animations disabled).
+- robot_state_publisher: the robot state publisher, which takes the published :code:`joint_states`
+  and publishes transforms.
+- ros2_control: ROS2 controller manager, which "manages" the controllers 
+  spawned by :code:`spawner.py` (below).
+- spawner.py: A part of ROS2 control that spawns and configures all of the requested controllers.
+
+:code:`ros2 launch moveit_arm demo_motion.launch.py` plans and executes a basic motion,
+which is described below. **If you don't have hardware, be sure to launch demo.launch.py first.**
+If you do, well, we don't have a launch file for that yet. TODO.
+
+Programmatic Movement
+---------------------
+
+:code:`ros2 launch moveit_arm demo_motion.launch.py` launches :code:`demo_motion.cpp`, which
+plans and executes a basic arm movement. This file can be customized as needed.
+
+The fundamental code from file this is as follows:
+
+.. code-block:: c++
+
+    static const std::string PLANNING_GROUP = "Arm";
+    moveit::planning_interface::MoveGroupInterface move_group(move_group_node, PLANNING_GROUP);
+
+    // Raw pointer to planning group for performance
+    const moveit::core::JointModelGroup* joint_model_group =
+      move_group.getCurrentState()->getJointModelGroup(PLANNING_GROUP);
+
+    // Get the state
+    moveit::core::RobotStatePtr current_state = move_group.getCurrentState(10);
+    // Copy joint values out of state
+    std::vector<double> joint_group_positions;
+    current_state->copyJointGroupPositions(joint_model_group, joint_group_positions);
+
+    // Set joint value and set to target
+    joint_group_positions[0] = 3.2;
+    move_group.setJointValueTarget(joint_group_positions);
+
+    // Move to target (blocking)
+    move_group.move();
+
+MoveIt Constraints
+---------------------
+
+In order to tune moveit's path planning algorithm, we have to modify constraints in the moveit_arm/config/excavation_ros_controllers.yaml file.
+This includes stopped_velocity_tolerance, which is set to 0.1 meaning that 0.1 rad/s and lower is considered as a zero velocity. Another parameter
+is goal_time, which is set to 5.0 meaning that the goal must be achieved in 5 seconds or else the task is aborted. The other parameters are specific
+to the shoulder, elbow and wrist joints. These parameters refer to trajectory and goal tolerance of each joint. If the actual joint position is outside
++/- the trajectory tolerance and the desired position, then the arm movement will be aborted. Furthermore, the arm movement will succeed if 
+the joint position is inside +/- the goal tolerance and the goal position.
+
+
+PID Control and Tuning
+------------------------------
+
+Here are the steps we used to tune our PID parameters:
+
+1. Set all gains to zero.
+2. Increase the P gain until the response to a disturbance is steady oscillation.
+3. Increase the D gain until the the oscillations go away (i.e. it's critically damped).
+4. Repeat steps 2 and 3 until increasing the D gain does not stop the oscillations.
+5. Set P and D to the last stable values.
+6. Increase the I gain until it brings you to the setpoint with the number of oscillations desired (normally zero but a quicker response can be had if you don't mind a couple oscillations of overshoot)
+
+.. note::
+
+  We found this method of tuning on the following Stack Exchange post: https://robotics.stackexchange.com/questions/167/what-are-good-strategies-for-tuning-pid-loops
