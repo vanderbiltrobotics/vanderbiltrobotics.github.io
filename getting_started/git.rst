@@ -47,4 +47,4 @@ Merging Strategy
 - Try to avoid creating a merge commits when completing PRs
 
 .. note::
-    After completing a PR, the branch should be deleted if it will not be used for future development. It can always be restored at a later point if needed. (Git2)
+    After completing a PR, the branch should be deleted if it will not be used for future development. It can always be restored at a later point if needed.
