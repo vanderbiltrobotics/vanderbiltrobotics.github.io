@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "make html"
+  },
+  "devDependencies": {
+    "firebase-tools": "^12.2.1"
+  }
+}
