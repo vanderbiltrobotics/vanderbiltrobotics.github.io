@@ -1,5 +1,5 @@
 ************************************
-Installing ROS2 on Linux (RyanRules)
+Installing ROS2 on Linux RyanRules
 ************************************
 
 ROS2 is well supported on linux so the installation documentation they provide works out of the box.
