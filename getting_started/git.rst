@@ -25,7 +25,7 @@ Each GitHub project can be considered an overarching area of focus. We have an a
 Our main board for misceallaneous work items that need to get done is General. Using projects gives us a good view of what is being worked on by who and what needs to be done in the future while requiring little
 maintenence on our part due to the nice automation features and ability to link pull requests to issues.
 
-If you ever need something to work on, take a look at the projects and feel free to assign yourself to a work item or better yet, add a completely new work item!
+If you ever need something to work on, take a look at the projects and feel free to assign yourself to a work item or better yet, add a completely new work item! 
 
 Branching Strategy
 ==================
@@ -47,4 +47,4 @@ Merging Strategy
 - Try to avoid creating a merge commits when completing PRs
 
 .. note::
-    After completing a PR, the branch should be deleted if it will not be used for future development. It can always be restored at a later point if needed. 
+    After completing a PR, the branch should be deleted if it will not be used for future development. It can always be restored at a later point if needed. (Git)
