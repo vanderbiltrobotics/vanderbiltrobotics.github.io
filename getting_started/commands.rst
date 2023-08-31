@@ -4,6 +4,8 @@ Command Line Basics
 A lot of work on the programming team involves the terminal so here is a quick reference for 
 getting comfortable with working in the terminal. Note that linux and macOS are both Unix operating systems.
 
+GREAT
+
 .. tabs::
 
   .. group-tab:: Unix
