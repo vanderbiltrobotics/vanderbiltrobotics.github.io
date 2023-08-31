@@ -3,6 +3,7 @@ VU Robotics ROS2 documentation
 *******************************
 
 Welcome to VUR's main documentation site! 
+Here's the URL: https://vanderbiltrobotics-1f015.web.app/
 There are three main types of documentation here:
 
 1. **Package Use.** The most important part -- how to properly use packages and code (how to write a ROS controller, creating a URDF, tuning mapping packages, etc.) 
