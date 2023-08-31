@@ -10,6 +10,7 @@ Each system should have background resources to facilitate brainstorming, genera
 4. Which subsystem the resource is most relevant for
 
 ## Design Specs
+The overall design and every piece of hardware should have a justification. This section is for documenting motor specs, sensor specs, dimensions, design spec requirements, etc. Each spec should also have a short justification for why it was chosen to asist in educating future members about how to make their design decisions. 
 
 ## CAD
 
