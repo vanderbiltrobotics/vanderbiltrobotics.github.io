@@ -22,7 +22,11 @@
    :hidden:
    
    mechanical/intro.md
-   parameters.rst
+   mechanical/resources.rst
+   mechancial/design-spec.rst
+   mechanical/cad.rst
+   mechanical/presentations.rst
+   mechanical/system-design-review.rst
 
 .. toctree::
    :caption: Intro Projects
