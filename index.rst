@@ -17,6 +17,14 @@
    getting_started/best-practices
 
 .. toctree::
+   :caption: Mechanical
+   :maxdepth: 2
+   :hidden:
+   
+   mechanical/intro.md
+   parameters.rst
+
+.. toctree::
    :caption: Intro Projects
    :maxdepth: 2
    :hidden:
