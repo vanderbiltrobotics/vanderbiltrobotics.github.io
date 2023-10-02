@@ -29,6 +29,18 @@
    mechanical/system-design-review.rst
 
 .. toctree::
+   :caption: Electrical
+   :maxdepth: 2
+   :hidden:
+   
+   electrical/intro.md
+   electrical/resources.rst
+   electrical/design-spec.rst
+   electrical/cad.rst
+   electrical/presentations.rst
+   electrical/system-design-review.rst
+
+.. toctree::
    :caption: Intro Projects
    :maxdepth: 2
    :hidden:
