@@ -17,6 +17,18 @@
    getting_started/best-practices
 
 .. toctree::
+   :caption: Mechanical
+   :maxdepth: 2
+   :hidden:
+   
+   mechanical/intro.md
+   mechanical/resources.rst
+   mechancial/design-spec.rst
+   mechanical/cad.rst
+   mechanical/presentations.rst
+   mechanical/system-design-review.rst
+
+.. toctree::
    :caption: Intro Projects
    :maxdepth: 2
    :hidden:
